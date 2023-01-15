@@ -79,7 +79,7 @@ export class HomeComponent implements OnInit {
 
     this.auth2.attachClickHandler(this.loginElement.nativeElement, {},
       (googleAuthUser: any) => {
-
+        const profile = googleAuthUser.getBasicProfile();
 
         const externalAuth: ExternalAuthDto = {
           provider: 'Google',
@@ -89,8 +89,11 @@ export class HomeComponent implements OnInit {
           .subscribe({
             next: (res) => {
               localStorage.setItem("token", res.token);
+              localStorage.setItem("name", profile.getName());
+              localStorage.setItem("email", profile.getEmail());
+              localStorage.setItem("picture", profile.getImageUrl());
               this.authService.sendAuthStateChangeNotification(res.isAuthSuccessful);
-              this.router.navigate(["/biodata"]);
+              this.router.navigate(["/dashboard/nfts"]);
             },
             error: (err: HttpErrorResponse) => {
               this.errorMessage = err.message;
