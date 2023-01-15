@@ -1,0 +1,42 @@
+<div class="card">
+  <div class="card-body">
+    <h1 class="card-title">Login</h1>
+
+    <div *ngIf="showError" class="alert alert-danger" role="alert">
+      {{ errorMessage }}
+    </div>
+
+    <form [formGroup]="loginForm" autocomplete="off" novalidate (ngSubmit)="loginUser(loginForm.value)">
+      <div class="row mb-3">
+        <label for="username" class="col-form-label col-sm-2">Username:</label>
+        <div class="col-md-5">
+          <input type="text" id="username" formControlName="username" class="form-control" />
+        </div>
+        <div class="col-md-5"></div>
+      </div>
+      <div class="row mb-3">
+        <label for="password" class="col-form-label col-sm-2">Password:</label>
+        <div class="col-md-5">
+          <input type="password" id="password" formControlName="password" class="form-control" />
+        </div>
+        <div class="col-md-5"></div>
+      </div>
+      <div>
+        <a [routerLink]="['/authentication/forgotpassword']"> Forgot Password </a>
+      </div>
+      <br />
+      <div class="row mb-3">
+        <div class="col-md-1">
+          <button type="submit" class="btn btn-info" [disabled]="!loginForm.valid">Login</button>
+        </div>
+      </div>
+    </form>
+    <hr />
+    <div>
+      <h2>External Providers</h2>
+      <div style="padding: 20px">
+        <button class="btn btn-info" type="button" (click)="externalLogin()">Google</button>
+      </div>
+    </div>
+  </div>
+</div>
