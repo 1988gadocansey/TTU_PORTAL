@@ -1,11 +1,11 @@
 {
   "name": "angular-tailwind",
   "version": "0.1.0",
-  "description": "Angular & Tailwind CSS Admin Dashboard Starter Kit, Free and Open Source",
-  "homepage": "https://github.com/luciano-work/angular-tailwind#readme",
+  "description": "Client for TTU Student Portal",
+  "homepage": "https://records.ttuportal.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/luciano-work/angular-tailwind.git"
+    "url": "git+https://github.com/1988gadocansey"
   },
   "keywords": [
     "angular",
@@ -15,7 +15,7 @@
     "dark mode",
     "open source"
   ],
-  "author": "Luciano Oliveira <me@lanno.dev>",
+  "author": "Gad Ocansey <gadocansey@gmail.com>",
   "license": "MIT",
   "scripts": {
     "ng": "ng",

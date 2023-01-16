@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './home/home.component';
 import { ErrorHandlerService } from './core/services/error-handler.service';
-import { AuthenticationModule } from './authentication/authentication.module';
+
 export function tokenGetter() {
   return localStorage.getItem("token");
 }
@@ -17,7 +17,7 @@ export function tokenGetter() {
 @NgModule({
 
   declarations: [AppComponent, HomeComponent],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, SocialLoginModule, AuthenticationModule,
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, SocialLoginModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

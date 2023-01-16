@@ -3,16 +3,21 @@ import { MenuItem } from '../models/menu.model';
 export class Menu {
   public static pages: MenuItem[] = [
     {
-      group: 'Base',
+      group: 'Home',
       separator: false,
       items: [
         {
           icon: 'assets/icons/outline/chart-pie.svg',
           label: 'Dashboard',
           route: '/dashboard',
-          children: [{ label: 'Nfts', route: '/dashboard/nfts' }],
+          children: [
+            { label: 'Biodata', route: '/dashboard/nfts' },
+            { label: 'Biometric Registration', route: '/dashboard/nfts' },
+            { label: 'Alumni Details', route: '/dashboard/nfts' }
+
+          ],
         },
-        {
+        /* {
           icon: 'assets/icons/outline/lock-closed.svg',
           label: 'Auth',
           route: '/auth',
@@ -23,54 +28,87 @@ export class Menu {
             { label: 'New Password', route: '/auth/new-password' },
             { label: 'Two Steps', route: '/auth/two-steps' },
           ],
-        },
+        }, */
       ],
     },
     {
-      group: 'Colaboration',
+      group: 'Academics',
       separator: true,
       items: [
         {
           icon: 'assets/icons/outline/download.svg',
-          label: 'Download',
+          label: 'Option Change',
+          route: '/download',
+        },
+        {
+          icon: 'assets/icons/outline/download.svg',
+          label: 'Registration',
+          route: '/download',
+        },
+        {
+          icon: 'assets/icons/outline/download.svg',
+          label: 'Statement of Result',
           route: '/download',
         },
         {
           icon: 'assets/icons/outline/gift.svg',
-          label: 'Gift Card',
+          label: 'Official Documents',
+          route: '/gift',
+        },
+        {
+          icon: 'assets/icons/outline/gift.svg',
+          label: 'Clarence',
+          route: '/gift',
+        },
+        {
+          icon: 'assets/icons/outline/gift.svg',
+          label: 'Virtual Classroom',
+          route: '/gift',
+        },
+
+      ],
+    },
+    {
+      group: 'Liaison',
+      separator: true,
+      items: [
+        {
+          icon: 'assets/icons/outline/download.svg',
+          label: 'Attachment Letter',
+          route: '/download',
+        },
+        {
+          icon: 'assets/icons/outline/gift.svg',
+          label: 'Semester Out',
           route: '/gift',
         },
         {
           icon: 'assets/icons/outline/users.svg',
-          label: 'Users',
+          label: 'Assumption of Duty',
           route: '/users',
         },
       ],
     },
     {
-      group: 'Config',
+      group: 'Finance',
       separator: false,
       items: [
         {
           icon: 'assets/icons/outline/cog.svg',
-          label: 'Settings',
+          label: 'Bills',
+          route: '/settings',
+        },
+        {
+          icon: 'assets/icons/outline/cog.svg',
+          label: 'Pay Fees',
           route: '/settings',
         },
         {
           icon: 'assets/icons/outline/bell.svg',
-          label: 'Notifications',
+          label: 'Payments',
           route: '/gift',
         },
-        {
-          icon: 'assets/icons/outline/folder.svg',
-          label: 'Folders',
-          route: '/folders',
-          children: [
-            { label: 'Current Files', route: '/folders/current-files' },
-            { label: 'Downloads', route: '/folders/download' },
-            { label: 'Trash', route: '/folders/trash' },
-          ],
-        },
+
       ],
     },
   ];

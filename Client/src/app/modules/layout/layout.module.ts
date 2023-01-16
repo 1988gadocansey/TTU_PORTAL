@@ -31,8 +31,8 @@ import { LayoutComponent } from './layout.component';
     NavbarMenuComponent,
     NavbarMobileComponent,
     NavbarMobileMenuComponent,
-    NavbarMobileSubmenuComponent,
+    NavbarMobileSubmenuComponent
   ],
   imports: [CommonModule, LayoutRoutingModule, HttpClientModule, AngularSvgIconModule.forRoot(), SharedModule],
 })
-export class LayoutModule {}
+export class LayoutModule { }

@@ -93,7 +93,7 @@ export class HomeComponent implements OnInit {
               localStorage.setItem("email", profile.getEmail());
               localStorage.setItem("picture", profile.getImageUrl());
               this.authService.sendAuthStateChangeNotification(res.isAuthSuccessful);
-              this.router.navigate(["/dashboard/nfts"]);
+              this.router.navigate(["/welcome/live"]);
             },
             error: (err: HttpErrorResponse) => {
               this.errorMessage = err.message;

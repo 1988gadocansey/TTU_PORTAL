@@ -10,7 +10,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'biodata', component: BiodataComponent, canActivate: [AuthGuard] },
   { path: '404', component: NotFoundComponent },
-  { path: 'authentication', loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule) },
+
+
 
   {
     path: '',
