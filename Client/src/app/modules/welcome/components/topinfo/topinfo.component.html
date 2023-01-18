@@ -33,7 +33,7 @@
                       fill="currentColor"
                       d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z"
                     ></path></svg></span
-                ><span>12%</span>
+                ><span>Status</span>
               </div>
             </div>
             <div class="flex items-center justify-center">
@@ -75,11 +75,15 @@
                 <h3
                   class="text-sm leading-tight text-gray-500 dark:text-slate-400"
                 >
-                  Level
+                  QA
                 </h3>
                 <h5 class="font-semibold leading-tight">
                   <div>
-                    {{ profile["studentinfo"]["currentLevel"] | titlecase }}
+                    {{
+                      profile["studentinfo"]["lecturerAssessed"] === 1
+                        ? "Yes"
+                        : "No"
+                    }}
                   </div>
                 </h5>
               </div>
@@ -124,7 +128,7 @@
                       fill="currentColor"
                       d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
                     ></path></svg></span
-                ><span>12%</span>
+                ><span>Academics%</span>
               </div>
             </div>
             <div class="flex items-center justify-center">
@@ -153,13 +157,26 @@
             <div class="flex items-center justify-center">
               <div>
                 <h3
-                  class="text-lg leading-tight text-gray-500 dark:text-slate-400"
+                  class="text-sm leading-tight text-gray-500 dark:text-slate-400"
                 >
-                  Sales
+                  Programme
                 </h3>
                 <h1 class="text-1xl font-semibold leading-tight">
-                  <div>$7,770</div>
+                  <div>{{ profile["studentinfo"]["programme"] }}</div>
                 </h1>
+              </div>
+              &nbsp; &nbsp; &nbsp;
+              <div>
+                <h3
+                  class="text-sm leading-tight text-gray-500 dark:text-slate-400"
+                >
+                  Level
+                </h3>
+                <h5 class="font-semibold leading-tight">
+                  <div>
+                    {{ profile["studentinfo"]["currentLevel"] }}
+                  </div>
+                </h5>
               </div>
             </div>
             <div class="flex items-center justify-center">
@@ -281,7 +298,7 @@
               <div
                 class="inline-flex items-center rounded-full border border-blue-500 bg-blue-500 py-1 px-3 text-xs capitalize leading-none text-white"
               >
-                <!----><span>Last 24 hours</span>
+                <!----><span>Calender</span>
               </div>
             </div>
             <div class="flex items-center justify-center">

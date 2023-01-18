@@ -39,7 +39,7 @@ public class MappingProfile : Profile
              .ForMember(u => u.Programme, opt => opt.MapFrom(x => x.Programme.SLUG))
              .ForMember(u => u.IndexNumber, opt => opt.MapFrom(x => x.INDEXNO))
              .ForMember(u => u.StudentNumber, opt => opt.MapFrom(x => x.STNO))
-              .ForMember(u => u.CurrentLevel, opt => opt.MapFrom(x => x.Level.name))
+              .ForMember(u => u.CurrentLevel, opt => opt.MapFrom(x => x.LEVEL))
                .ForMember(u => u.Cgpa, opt => opt.MapFrom(x => x.CGPA))
                 .ForMember(u => u.Status, opt => opt.MapFrom(x => x.STATUS))
            .ForMember(u => u.Cgpa, opt => opt.MapFrom(x => x.CGPA))
