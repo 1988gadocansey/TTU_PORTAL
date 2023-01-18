@@ -11,11 +11,15 @@ namespace Students.Repository
         {
         }
 
-        public IEnumerable<MountedCourse> GetAllCourses(bool trackChanges)
+        public IEnumerable<MountedCourse> GetAllCourses(bool trackChanges, int semester, string level, string programme, string years)
         {
-            IQueryable<MountedCourse> mountedCourses = FindAll(trackChanges);
+            IQueryable<MountedCourse> courses = FindAll(false);
 
-            return mountedCourses
+            return courses
+                        .Where(a => a.COURSE_SEMESTER == semester)
+                        .Where(a => a.PROGRAMME == programme)
+                        .Where(a => a.COURSE_LEVEL == level)
+                         .Where(a => a.COURSE_YEAR == years)
                         .OrderBy(c => c.COURSE_TYPE)
                         .OrderBy(c => c.Course.COURSE_NAME)
                         .Include(a => a.Course)

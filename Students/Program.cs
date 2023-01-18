@@ -82,6 +82,7 @@ var emailConfig = builder.Configuration
 builder.Services.AddSingleton(emailConfig);
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<ICalenderRepository, CalenderRepository>();
 builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
 var app = builder.Build();

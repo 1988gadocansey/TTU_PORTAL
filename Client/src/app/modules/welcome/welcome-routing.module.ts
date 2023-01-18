@@ -11,7 +11,7 @@ const routes: Routes = [
 
             { path: '', redirectTo: 'live', pathMatch: 'full' },
             { path: 'live', component: InfoComponent },
-            { path: '**', redirectTo: 'error/404' },
+            { path: '**', redirectTo: '/404' },
         ],
     },
 ];

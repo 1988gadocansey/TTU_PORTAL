@@ -17,23 +17,30 @@ export class Menu {
 
           ],
         },
-        /* {
-          icon: 'assets/icons/outline/lock-closed.svg',
-          label: 'Auth',
-          route: '/auth',
-          children: [
-            { label: 'Sign up', route: '/auth/sign-up' },
-            { label: 'Sign in', route: '/auth/sign-in' },
-            { label: 'Forgot Password', route: '/auth/forgot-password' },
-            { label: 'New Password', route: '/auth/new-password' },
-            { label: 'Two Steps', route: '/auth/two-steps' },
-          ],
-        }, */
+
       ],
     },
     {
       group: 'Academics',
-      separator: true,
+      separator: false,
+      items: [
+        {
+          icon: 'assets/icons/outline/chart-pie.svg',
+          label: 'Academics',
+          route: '/academics',
+          children: [
+            { label: 'Course Registration', route: '/academics/registration' },
+            { label: 'Option Change', route: '/download', },
+            { label: 'Statement of Result', route: '/download', }
+
+          ],
+        },
+
+      ],
+    },
+    /* {
+      group: 'Academics',
+      separator: false,
       items: [
         {
           icon: 'assets/icons/outline/download.svg',
@@ -43,7 +50,7 @@ export class Menu {
         {
           icon: 'assets/icons/outline/download.svg',
           label: 'Registration',
-          route: '/download',
+          route: '/academics/registration',
         },
         {
           icon: 'assets/icons/outline/download.svg',
@@ -67,7 +74,7 @@ export class Menu {
         },
 
       ],
-    },
+    }, */
     {
       group: 'Liaison',
       separator: true,

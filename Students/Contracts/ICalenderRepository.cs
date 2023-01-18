@@ -4,6 +4,6 @@ namespace Students.Contracts
 {
     public interface ICalenderRepository
     {
-        IEnumerable<Calender> GetCalender(bool trackChanges);
+        Calender GetCalender(bool trackChanges);
     }
 }

@@ -10,10 +10,6 @@ namespace Students.Repository
         {
         }
 
-        public IEnumerable<Calender> GetCalender(bool trackChanges) =>
-           FindAll(trackChanges)
-           .OrderBy(c =>c.ID )
-           
-           .ToList();
+        public Calender GetCalender(bool trackChanges) => Get(a => a.STATUS == 1);
     }
 }

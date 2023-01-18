@@ -3,6 +3,7 @@ import { Event } from '../../core/models/events/event';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EnvironmentUrlService } from './environment-url.service';
+import { MountedCourse } from '../models/academics/mountedCourses';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,9 @@ export class RepositoryService {
   }
   public getDashboard = (route: string) => {
     return this.http.get<any>(this.createCompleteRoute(route, this.envUrl.urlAddress));
+  }
+  public getMountedCourses = (route: string) => {
+    return this.http.get<MountedCourse>(this.createCompleteRoute(route, this.envUrl.urlAddress));
   }
 
   public getClaims = (route: string) => {

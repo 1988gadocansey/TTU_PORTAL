@@ -29,6 +29,8 @@ namespace Students.Repository
                 .AsNoTracking() :
               RepositoryContext.Set<T>().Take(10);
 
+        public async Task<IEnumerable<T>> FindAllAsync() => await _entitiySet.AsAsyncEnumerable();
+
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression,
         bool trackChanges) =>
             !trackChanges ?

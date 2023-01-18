@@ -8,52 +8,67 @@ using Students.Repository;
 namespace Students.Controllers
 {
     [Route("api/courses")]
-   
+
     [ApiController]
     public class CourseController : ControllerBase
     {
         private readonly IRepositoryManager _repository;
         private readonly IMapper _mapper;
+        private IUnitOfWork _unitOfWork;
+        private ICalenderRepository _calenderRepository;
 
-              private readonly RepositoryContext _repositoryContext;
-        
-        public CourseController(IRepositoryManager repository, IMapper mapper, RepositoryContext repositoryContext)
+        private readonly RepositoryContext _repositoryContext;
+
+        public CourseController(IRepositoryManager repository, IMapper mapper, RepositoryContext repositoryContext, ICalenderRepository calenderRepository, IUnitOfWork unitOfWork)
         {
             _repository = repository;
             _mapper = mapper;
-            _repositoryContext=repositoryContext;
+            _repositoryContext = repositoryContext;
+            _unitOfWork = unitOfWork;
+            _calenderRepository = calenderRepository;
+
         }
 
-         [HttpGet]
-        public IActionResult GetCourses()
+        [HttpGet]
+        public async Task<IActionResult> GetCourses()
         {
-              
-                var user = User.FindFirst(ClaimTypes.NameIdentifier);
-                var claims = User.Claims;
 
-                var courses = _repository.MountedCourse.GetAllCourses(trackChanges: false);
+            var claimsIdentity = this.User.Identity as ClaimsIdentity;
+            var userId = claimsIdentity?.FindFirst(ClaimTypes.Name)?.Value;
 
-                var coursesdto = _mapper.Map<IEnumerable<MountedCourseDto>>(courses);
-              
-                
+            var student = _repository.Student.GetStudentDetails(userId);
 
-                return Ok(coursesdto);
-           
-        } 
-         /*   [HttpGet]
-        public IQueryable<MountedCourseDto> GetCourses()
+
+            var courses = _repository.MountedCourse.GetAllCourses(trackChanges: false)
+
+                        .Where(a => a.COURSE_YEAR == _calenderRepository.GetCalender(false).YEAR)
+                         .Where(a => a.COURSE_SEMESTER == Convert.ToInt32(_calenderRepository.GetCalender(false).SEMESTER))
+                        .Where(a => a.PROGRAMME == student?.PROGRAMMECODE)
+                        .Where(a => a.COURSE_LEVEL == student?.LEVEL);
+
+
+
+            var coursesdto = _mapper.Map<IEnumerable<MountedCourseDto>>(courses);
+
+
+            return await courses;
+
+
+        }
+        /*   [HttpGet]
+       public IQueryable<MountedCourseDto> GetCourses()
 {
-    var books = from b in _repositoryContext.MountedCourses
-                select new MountedCourseDto()
-                {
-                    CourseName = b.Course.COURSE_NAME,
-                    CourseCode = b.Course.COURSE_CODE
-                     
-                };
+   var books = from b in _repositoryContext.MountedCourses
+               select new MountedCourseDto()
+               {
+                   CourseName = b.Course.COURSE_NAME,
+                   CourseCode = b.Course.COURSE_CODE
 
-    return books;
+               };
+
+   return books;
 } */
 
-       
+
     }
 }
