@@ -20,7 +20,7 @@ export class MountedCoursesComponent {
     const apiAddress: string = "api/courses";
     this.repository.getMountedCourses(apiAddress)
       .subscribe(data => {
-        this.courses.push(data),
+        this.courses = data,
           console.log(this.courses)
 
 

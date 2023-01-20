@@ -16,7 +16,7 @@ public record MountedCourse : BaseEntity
     public int COURSE { get; set; }
 
     [ForeignKey("COURSE")]
-    public Course Course { get; set; }
+    public Course Courses { get; set; }
 
 
 

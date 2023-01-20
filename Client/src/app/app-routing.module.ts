@@ -11,8 +11,6 @@ const routes: Routes = [
   { path: 'biodata', component: BiodataComponent, canActivate: [AuthGuard] },
   { path: '404', component: NotFoundComponent },
 
-
-
   {
     path: '',
     loadChildren: () => import('./modules/layout/layout.module').then((m) => m.LayoutModule),

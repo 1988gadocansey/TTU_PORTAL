@@ -11,7 +11,9 @@ const routes: Routes = [
 
             { path: '', redirectTo: 'registration', pathMatch: 'full' },
             { path: 'registration', component: CourseRegistrationComponent },
+
             { path: '**', redirectTo: '/404' },
+
         ],
     },
 ];

@@ -7,7 +7,7 @@ using Students.Repository;
 
 namespace Students.Controllers
 {
-    [Route("api/courses")]
+    [Route("api/old")]
 
     [ApiController]
     public class CourseController : ControllerBase
@@ -30,28 +30,28 @@ namespace Students.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetCourses()
+        public async Task<IActionResult> GetMountedCourses()
         {
 
             var claimsIdentity = this.User.Identity as ClaimsIdentity;
             var userId = claimsIdentity?.FindFirst(ClaimTypes.Name)?.Value;
 
-            var student = _repository.Student.GetStudentDetails(userId);
+            var student = _repository.Student.GetStudentDetails(userId).ALLOW_REGISTER;
 
 
-            var courses = _repository.MountedCourse.GetAllCourses(trackChanges: false)
+            /*  var courses = _repository.MountedCourse.GetAllCourses(trackChanges: false)
 
-                        .Where(a => a.COURSE_YEAR == _calenderRepository.GetCalender(false).YEAR)
-                         .Where(a => a.COURSE_SEMESTER == Convert.ToInt32(_calenderRepository.GetCalender(false).SEMESTER))
-                        .Where(a => a.PROGRAMME == student?.PROGRAMMECODE)
-                        .Where(a => a.COURSE_LEVEL == student?.LEVEL);
-
-
-
-            var coursesdto = _mapper.Map<IEnumerable<MountedCourseDto>>(courses);
+                         .Where(a => a.COURSE_YEAR == _calenderRepository.GetCalender(false).YEAR)
+                          .Where(a => a.COURSE_SEMESTER == Convert.ToInt32(_calenderRepository.GetCalender(false).SEMESTER))
+                         .Where(a => a.PROGRAMME == student?.PROGRAMMECODE)
+                         .Where(a => a.COURSE_LEVEL == student?.LEVEL);
 
 
-            return await courses;
+
+             var coursesdto = _mapper.Map<IEnumerable<MountedCourseDto>>(courses);
+  */
+
+            return Ok(student);
 
 
         }

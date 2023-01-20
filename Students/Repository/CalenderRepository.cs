@@ -1,15 +1,30 @@
+using Microsoft.EntityFrameworkCore;
 using Students.Contracts;
 using Students.Entities.Models;
 
 namespace Students.Repository
 {
-    public class CalenderRepository : RepositoryBase<Calender>, ICalenderRepository
+    public class CalenderRepository : ICalenderRepository
     {
-        public CalenderRepository(RepositoryContext repositoryContext)
-            : base(repositoryContext)
+        private RepositoryContext _repositoryContext;
+        private IUnitOfWork _unitOfWork;
+
+
+        public CalenderRepository(RepositoryContext repositoryContext, IUnitOfWork unitOfWork)
         {
+            _repositoryContext = repositoryContext;
+
+            _unitOfWork = unitOfWork;
         }
 
-        public Calender GetCalender(bool trackChanges) => Get(a => a.STATUS == 1);
+        public async Task<Calender> GetCalender()
+        {
+            var calender = await _repositoryContext.Calenders.AsNoTracking().FirstOrDefaultAsync(a => a.STATUS == 1);
+
+            return calender;
+
+
+
+        }
     }
 }

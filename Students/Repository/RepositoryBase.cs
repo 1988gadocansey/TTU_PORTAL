@@ -29,7 +29,7 @@ namespace Students.Repository
                 .AsNoTracking() :
               RepositoryContext.Set<T>().Take(10);
 
-        public async Task<IEnumerable<T>> FindAllAsync() => await _entitiySet.AsAsyncEnumerable();
+        // public async Task<IEnumerable<T>> FindAllAsync() => await _entitiySet.AsAsyncEnumerable();
 
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression,
         bool trackChanges) =>
@@ -94,12 +94,15 @@ namespace Students.Repository
             => _entitiySet.Where(expression).AsEnumerable();
 
 
-        public async Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken = default)
-            => await _entitiySet.ToListAsync(cancellationToken);
+        /*      public async Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken = default)
+                 => await _entitiySet.ToListAsync(cancellationToken);
+      */
+        public async Task<IEnumerable<T>> GetAllAsync()
+       => await _entitiySet.ToListAsync();
 
 
         public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> expression, CancellationToken cancellationToken = default)
-            => await _entitiySet.Where(expression).ToListAsync(cancellationToken);
+            => await RepositoryContext.Set<T>().Where(expression).ToListAsync(cancellationToken);
 
 
         public async Task<T> GetAsync(Expression<Func<T, bool>> expression, CancellationToken cancellationToken = default)
@@ -120,5 +123,10 @@ namespace Students.Repository
 
         public void UpdateRange(IEnumerable<T> entities)
             => RepositoryContext.UpdateRange(entities);
+
+        Task<IEnumerable<T>> IRepositoryBase<T>.GetAllAsync(CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

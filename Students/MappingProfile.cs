@@ -16,11 +16,12 @@ public class MappingProfile : Profile
             .ForMember(u => u.UserName, opt => opt.MapFrom(x => x.Email));
 
         CreateMap<MountedCourse, MountedCourseDto>()
-        .ForMember(c => c.CourseName, opt => opt.MapFrom(x => x.Course.COURSE_NAME))
-        .ForMember(b => b.CourseCode, opt => opt.MapFrom(b => b.Course.COURSE_CODE))
+        .ForMember(c => c.CourseName, opt => opt.MapFrom(x => x.Courses.COURSE_NAME))
+        .ForMember(b => b.CourseCode, opt => opt.MapFrom(b => b.Courses.COURSE_CODE))
         .ForMember(x => x.CourseType, opt => opt.MapFrom(x => x.COURSE_TYPE))
-         .ForMember(x => x.CourseCredit, opt => opt.MapFrom(x => x.COURSE_CREDIT))
-        .ReverseMap();
+         .ForMember(x => x.CourseCredit, opt => opt.MapFrom(x => x.COURSE_CREDIT));
+
+
 
         CreateMap<Course, CourseDto>()
          .ForMember(u => u.CourseName, opt => opt.MapFrom(x => x.COURSE_NAME))

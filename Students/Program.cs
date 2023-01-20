@@ -9,15 +9,21 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Students.Contracts;
+using MediatR;
+using Students.Behaviors;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddMediatR(x => x.AsTransient(), typeof(Program));
+// builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+//builder.Services.AddMediatR(typeof(Program));
 
 builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
 //builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.ConfigureRepositoryManager();
 builder.Services.AddAutoMapper(typeof(Program));
-
+builder.Services.AddSwaggerGen();
 var connectionString = "server=localhost;user=webmaster;password=PRINT45dull;database=portal";
 
 // Replace with your server version and type.
@@ -37,6 +43,8 @@ builder.Services.AddDbContext<RepositoryContext>(
         .EnableDetailedErrors()
 );
 
+
+//builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 
 builder.Services.AddIdentity<User, IdentityRole>(opt =>
 {
@@ -83,8 +91,11 @@ builder.Services.AddSingleton(emailConfig);
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ICalenderRepository, CalenderRepository>();
+builder.Services.AddScoped<IUserAccessor, UserAccessor>();
+//builder.Services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
+
 var app = builder.Build();
 
 app.UseHttpsRedirection();
@@ -94,9 +105,7 @@ app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();
-// Register the Swagger generator and the Swagger UI middlewares
-app.UseOpenApi();
-app.UseSwaggerUi3();
+
 app.MapControllers();
 
 app.Run();

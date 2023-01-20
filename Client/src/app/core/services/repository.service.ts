@@ -20,7 +20,7 @@ export class RepositoryService {
     return this.http.get<any>(this.createCompleteRoute(route, this.envUrl.urlAddress));
   }
   public getMountedCourses = (route: string) => {
-    return this.http.get<MountedCourse>(this.createCompleteRoute(route, this.envUrl.urlAddress));
+    return this.http.get<MountedCourse[]>(this.createCompleteRoute(route, this.envUrl.urlAddress));
   }
 
   public getClaims = (route: string) => {

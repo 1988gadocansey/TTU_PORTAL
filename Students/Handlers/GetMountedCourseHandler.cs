@@ -1,0 +1,48 @@
+using Microsoft.AspNetCore.Authorization;
+using Students.Entities.DataTransferObjects;
+using MediatR;
+using Students.Contracts;
+using Students.Repository;
+using AutoMapper;
+using System.Security.Claims;
+using Students.Queries.GetMountedCourses;
+
+namespace Students.Handlers;
+[Authorize]
+public class GetMountedCourseHandler : IRequestHandler<GetMountedQuery, IList<MountedCourseDto>>
+{
+
+
+    private readonly RepositoryContext _dbContext;
+    private ICalenderRepository _calenderRepository;
+    private readonly IRepositoryManager _repository;
+    private readonly IMapper _mapper;
+    private readonly IUserAccessor _userAccessor;
+
+    public GetMountedCourseHandler(RepositoryContext dbContext, ICalenderRepository calenderRepository, IRepositoryManager repository, IMapper mapper, IUserAccessor userAccessor)
+    {
+
+        _dbContext = dbContext;
+        _calenderRepository = calenderRepository;
+        _repository = repository;
+        _mapper = mapper;
+        _userAccessor = userAccessor ?? throw new ArgumentNullException(nameof(userAccessor));
+    }
+
+    public async Task<IList<MountedCourseDto>> Handle(GetMountedQuery request, CancellationToken cancellationToken)
+    {
+        var claimsIdentity = _userAccessor.User;
+        var userId = claimsIdentity?.FindFirst(ClaimTypes.Name)?.Value;
+
+        var student = _repository.Student.GetStudentDetails(userId);
+
+        var calender = await _calenderRepository.GetCalender();
+
+        var courses = await _repository.MountedCourse.GetAllCourses(Convert.ToInt32(calender.SEMESTER), student?.LEVEL, student?.PROGRAMMECODE, calender.YEAR, cancellationToken);
+
+        var coursesVm = _mapper.Map<IEnumerable<MountedCourseDto>>(courses);
+
+        return null;
+    }
+
+}

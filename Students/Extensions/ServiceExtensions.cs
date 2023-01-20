@@ -20,11 +20,11 @@ namespace Students.Extensions
 
             });
 
-     
- /*public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) =>
-            services.AddDbContext<RepositoryContext>(opts =>
-                opts.UseMySQL(configuration.GetConnectionString("sqlConnection"), b => b.MigrationsAssembly("Students")));
-                */
+
+        /*public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) =>
+                   services.AddDbContext<RepositoryContext>(opts =>
+                       opts.UseMySQL(configuration.GetConnectionString("sqlConnection"), b => b.MigrationsAssembly("Students")));
+                       */
 
 
         public static void ConfigureRepositoryManager(this IServiceCollection services) =>

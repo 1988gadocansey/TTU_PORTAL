@@ -10,14 +10,15 @@ namespace Students.Repository
         private IMountedCourseRepository? _mountedCourseRepository;
         private ICourseRepository? _courseRepository;
         private ICalenderRepository _calenderRepository;
-
+        private IUnitOfWork _unitOfWork;
         private IDashBoardRepository _dashboardRepository;
         private IEventRepository _eventRepository;
 
 
-        public RepositoryManager(RepositoryContext repositoryContext)
+        public RepositoryManager(RepositoryContext repositoryContext, IUnitOfWork unitOfWork)
         {
             _repositoryContext = repositoryContext;
+            _unitOfWork = unitOfWork;
 
         }
 
@@ -46,7 +47,7 @@ namespace Students.Repository
             get
             {
                 if (_mountedCourseRepository == null)
-                    _mountedCourseRepository = new MountedCourseRepository(_repositoryContext);
+                    _mountedCourseRepository = new MountedCourseRepository(_repositoryContext, _unitOfWork);
 
                 return _mountedCourseRepository;
             }
@@ -58,7 +59,7 @@ namespace Students.Repository
             get
             {
                 if (_calenderRepository == null)
-                    _calenderRepository = new CalenderRepository(_repositoryContext);
+                    _calenderRepository = new CalenderRepository(_repositoryContext, _unitOfWork);
 
                 return _calenderRepository;
             }

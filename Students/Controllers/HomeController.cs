@@ -34,7 +34,7 @@ public class HomeController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult GetDashboard()
+    public async Task<IActionResult> GetDashboard()
     {
 
 
@@ -47,9 +47,9 @@ public class HomeController : ControllerBase
 
         _logger.LogInformation("Student visited dashboard details " + studentinfo.Programme);
 
-        var calender = _repository.Calender.GetCalender(trackChanges: false);
+        var calender = await _repository.Calender.GetCalender();
 
-        var calenderdto = _mapper.Map<IEnumerable<CalenderDto>>(calender);
+        var calenderdto = _mapper.Map<CalenderDto>(calender);
 
         // lets created event of login
         var log = new Event
