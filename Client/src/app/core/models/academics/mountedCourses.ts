@@ -1,7 +1,7 @@
 export interface MountedCourse {
     CourseName: string;
     CourseCode: string;
-    CourseType: string,
+    CourseType: string;
 
     CourseCredit: number
 }

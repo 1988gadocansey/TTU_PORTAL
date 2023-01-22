@@ -92,27 +92,30 @@
       </div>
 
       <!---->
-      <p>{{ courses | json }}</p>
-      <table class="w-full table-auto">
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>Course Code</th>
-            <th>Course Name</th>
-            <th>Course Credit</th>
-            <th>Course Type</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let course of courses; let i = index">
-            <td>{{ i + 1 }}</td>
-            <td>{{ course.CourseCode }}</td>
-            <td>{{ course.CourseName }}</td>
-            <td>{{ course.CourseCredit }}</td>
-            <td>{{ course.CourseType }}</td>
-          </tr>
-        </tbody>
-      </table>
+
+      <ng-container *ngIf="courses">
+        <p>{{ courses }}</p>
+        <table class="w-full table-auto">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Course Code</th>
+              <th>Course Name</th>
+              <th>Course Credit</th>
+              <th>Course Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let course of courses; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ course.CourseCode }}</td>
+              <td>{{ course.CourseName }}</td>
+              <td>{{ course.CourseCredit }}</td>
+              <td>{{ course.CourseType }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
     </div>
     <!---->
   </div>
