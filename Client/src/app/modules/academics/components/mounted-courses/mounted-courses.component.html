@@ -1,100 +1,110 @@
-<section class="p-6 xl:mx-auto xl:max-w-6xl">
-  <section class="mb-6 flex items-center justify-between">
-    <div class="flex items-center justify-start">
-      <span
-        class="mr-3 inline-flex h-12 w-12 items-center justify-center rounded-full bg-white text-black dark:bg-slate-900/70 dark:text-white"
-        ><svg viewBox="0 0 24 24" width="24" height="24" class="inline-block">
-          <path
-            fill="currentColor"
-            d="M21,19A1,1 0 0,1 20,20H19V18H21V19M15,20V18H17V20H15M11,20V18H13V20H11M7,20V18H9V20H7M4,20A1,1 0 0,1 3,19V18H5V20H4M19,4H5A2,2 0 0,0 3,6V8H5L11,8H13L19,8H21V6C21,4.89 20.11,4 19,4M5,14H3V16H5V14M5,10H3V12H5V10M21,10H19V12H21V10M21,14H19V16H21V14M11,16V14H13V16H11M11,12V10H13V12H11"
-          ></path></svg
-      ></span>
-      <h2 class="text-3xl leading-tight">Mounted Courses</h2>
+<ng-container *ngIf="courses.length == 0">
+  <div role="alert">
+    <div class="rounded-t bg-red-500 px-4 py-2 font-bold text-white">
+      No Mounted Courses available
     </div>
-  </section>
-  <div
-    class="mb-6 rounded-lg border border-blue-500 bg-blue-500 px-3 py-6 text-white transition-colors duration-150 last:mb-0 md:py-3"
-  >
-    <div class="block items-center justify-between md:flex">
-      <div class="mb-6 flex items-center justify-center md:mb-0">
-        <div class="flex flex-col items-center md:flex-row">
-          <span
-            class="inline-flex h-10 w-10 items-center justify-center md:mr-2 md:h-5 md:w-5"
-            ><svg
-              viewBox="0 0 24 24"
-              width="24"
-              height="24"
-              class="inline-block"
-            >
-              <path
-                fill="currentColor"
-                d="M23,11H18A1,1 0 0,0 17,12V21A1,1 0 0,0 18,22H23A1,1 0 0,0 24,21V12A1,1 0 0,0 23,11M23,20H18V13H23V20M20,2H2C0.89,2 0,2.89 0,4V16A2,2 0 0,0 2,18H9V20H7V22H15V20H13V18H15V16H2V4H20V9H22V4C22,2.89 21.1,2 20,2Z"
-              ></path></svg></span
-          ><span class="text-center md:py-2 md:text-left"
-            ><b>Responsive table.</b> Collapses on mobile
-          </span>
-        </div>
-      </div>
-      <div class="flex items-center justify-center">
-        <button
-          class="inline-flex cursor-pointer items-center justify-center whitespace-nowrap rounded-full border border-white bg-white p-1 text-black ring-gray-200 transition-colors duration-150 focus:outline-none focus:ring hover:bg-gray-100 dark:ring-gray-500"
-          type="button"
-        >
-          <span class="inline-flex h-6 w-6 items-center justify-center"
-            ><svg
-              viewBox="0 0 24 24"
-              width="16"
-              height="16"
-              class="inline-block"
-            >
-              <path
-                fill="currentColor"
-                d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
-              ></path></svg></span
-          ><!---->
-        </button>
-      </div>
+    <div
+      class="rounded-b border border-t-0 border-red-400 bg-red-100 px-4 py-3 text-red-700"
+    >
+      <p>Please contact your faculty exams officer.</p>
     </div>
   </div>
-  <div class="mb-6 flex flex-col rounded-2xl bg-white dark:bg-slate-900/70">
-    <div class="flex-1">
-      <div
-        class="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden"
-        style="display: none"
-      >
-        <div
-          class="absolute inset-0 bg-gradient-to-tr from-gray-700 via-gray-900 to-gray-700 opacity-90 dark:from-gray-700 dark:via-gray-900 dark:to-gray-700"
-        ></div>
-        <div
-          class="max-h-modal z-50 flex w-11/12 flex-col rounded-2xl bg-white shadow-lg dark:bg-slate-900 md:w-3/5 lg:w-2/5 xl:w-4/12"
-          style="display: none"
-        >
-          <div class="flex-1 p-6">
-            <div class="mb-3 flex items-center justify-between">
-              <h1 class="text-2xl">Sample modal</h1>
-            </div>
-            <div class="space-y-3">
-              <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-              <p>This is sample modal</p>
-            </div>
-          </div>
-          <footer class="p-6">
-            <div class="-mb-3 flex flex-wrap items-center justify-start">
-              <button
-                class="mr-3 mb-3 inline-flex cursor-pointer items-center justify-center whitespace-nowrap rounded border border-blue-600 bg-blue-600 py-2 px-3 text-white ring-blue-300 transition-colors duration-150 last:mr-0 focus:outline-none focus:ring hover:border-blue-700 hover:bg-blue-700 dark:border-blue-500 dark:bg-blue-500 dark:ring-blue-700 hover:dark:border-blue-600 hover:dark:bg-blue-600"
-                type="button"
+</ng-container>
+<ng-container *ngIf="courses.length != 0">
+  <section class="p-6 xl:mx-auto xl:max-w-6xl">
+    <section class="mb-6 flex items-center justify-between">
+      <div class="flex items-center justify-start">
+        <span
+          class="mr-3 inline-flex h-12 w-12 items-center justify-center rounded-full bg-white text-black dark:bg-slate-900/70 dark:text-white"
+          ><svg viewBox="0 0 24 24" width="24" height="24" class="inline-block">
+            <path
+              fill="currentColor"
+              d="M21,19A1,1 0 0,1 20,20H19V18H21V19M15,20V18H17V20H15M11,20V18H13V20H11M7,20V18H9V20H7M4,20A1,1 0 0,1 3,19V18H5V20H4M19,4H5A2,2 0 0,0 3,6V8H5L11,8H13L19,8H21V6C21,4.89 20.11,4 19,4M5,14H3V16H5V14M5,10H3V12H5V10M21,10H19V12H21V10M21,14H19V16H21V14M11,16V14H13V16H11M11,12V10H13V12H11"
+            ></path></svg
+        ></span>
+        <h2 class="text-3xl leading-tight">Mounted Courses</h2>
+      </div>
+    </section>
+
+    <div
+      class="mb-6 rounded-lg border border-blue-500 bg-blue-500 px-3 py-6 text-white transition-colors duration-150 last:mb-0 md:py-3"
+    >
+      <div class="block items-center justify-between md:flex">
+        <div class="mb-6 flex items-center justify-center md:mb-0">
+          <div class="flex flex-col items-center md:flex-row">
+            <span
+              class="inline-flex h-10 w-10 items-center justify-center md:mr-2 md:h-5 md:w-5"
+              ><svg
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                class="inline-block"
               >
-                <!----><span class="px-2">Done</span></button
-              ><!---->
-            </div>
-          </footer>
+                <path
+                  fill="currentColor"
+                  d="M23,11H18A1,1 0 0,0 17,12V21A1,1 0 0,0 18,22H23A1,1 0 0,0 24,21V12A1,1 0 0,0 23,11M23,20H18V13H23V20M20,2H2C0.89,2 0,2.89 0,4V16A2,2 0 0,0 2,18H9V20H7V22H15V20H13V18H15V16H2V4H20V9H22V4C22,2.89 21.1,2 20,2Z"
+                ></path></svg></span
+            ><span class="text-center md:py-2 md:text-left"
+              ><b>Responsive table.</b> Collapses on mobile
+            </span>
+          </div>
+        </div>
+        <div class="flex items-center justify-center">
+          <button
+            class="inline-flex cursor-pointer items-center justify-center whitespace-nowrap rounded-full border border-white bg-white p-1 text-black ring-gray-200 transition-colors duration-150 focus:outline-none focus:ring hover:bg-gray-100 dark:ring-gray-500"
+            type="button"
+          >
+            <span class="inline-flex h-6 w-6 items-center justify-center"
+              ><svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                class="inline-block"
+              >
+                <path
+                  fill="currentColor"
+                  d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+                ></path></svg></span
+            ><!---->
+          </button>
         </div>
       </div>
+    </div>
+    <div class="mb-6 flex flex-col rounded-2xl bg-white dark:bg-slate-900/70">
+      <div class="flex-1">
+        <div
+          class="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden"
+          style="display: none"
+        >
+          <div
+            class="absolute inset-0 bg-gradient-to-tr from-gray-700 via-gray-900 to-gray-700 opacity-90 dark:from-gray-700 dark:via-gray-900 dark:to-gray-700"
+          ></div>
+          <div
+            class="max-h-modal z-50 flex w-11/12 flex-col rounded-2xl bg-white shadow-lg dark:bg-slate-900 md:w-3/5 lg:w-2/5 xl:w-4/12"
+            style="display: none"
+          >
+            <div class="flex-1 p-6">
+              <div class="mb-3 flex items-center justify-between">
+                <h1 class="text-2xl">Sample modal</h1>
+              </div>
+              <div class="space-y-3">
+                <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
+                <p>This is sample modal</p>
+              </div>
+            </div>
+            <footer class="p-6">
+              <div class="-mb-3 flex flex-wrap items-center justify-start">
+                <button
+                  class="mr-3 mb-3 inline-flex cursor-pointer items-center justify-center whitespace-nowrap rounded border border-blue-600 bg-blue-600 py-2 px-3 text-white ring-blue-300 transition-colors duration-150 last:mr-0 focus:outline-none focus:ring hover:border-blue-700 hover:bg-blue-700 dark:border-blue-500 dark:bg-blue-500 dark:ring-blue-700 hover:dark:border-blue-600 hover:dark:bg-blue-600"
+                  type="button"
+                >
+                  <!----><span class="px-2">Done</span></button
+                ><!---->
+              </div>
+            </footer>
+          </div>
+        </div>
 
-      <!---->
-
-      <ng-container *ngIf="courses">
-        <p>{{ courses | json }}</p>
         <table class="w-full table-auto">
           <thead>
             <tr>
@@ -115,8 +125,8 @@
             </tr>
           </tbody>
         </table>
-      </ng-container>
+      </div>
+      <!---->
     </div>
-    <!---->
-  </div>
-</section>
+  </section>
+</ng-container>
