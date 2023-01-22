@@ -10,20 +10,28 @@ using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Students.Contracts;
 using MediatR;
-using Students.Behaviors;
+using Microsoft.OpenApi.Models;
 using System.Reflection;
+using Students.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMediatR(x => x.AsTransient(), typeof(Program));
-// builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
-//builder.Services.AddMediatR(typeof(Program));
+
 
 builder.Services.ConfigureCors();
-builder.Services.ConfigureIISIntegration();
-//builder.Services.ConfigureSqlContext(builder.Configuration);
+builder.Services.ConfigureValidationAssembly();
+builder.Services.ConfigureIdentityManager();
+builder.Services.ConfigureCurrentUser();
+builder.Services.ConfigureException();
+builder.Services.ConfigureAuthorization();
+builder.Services.ConfigureValidationBehaviour();
+builder.Services.ConfigurePerformanceBehaviour();
+//builder.Services.ConfigureCacheBehavior();
+
 builder.Services.ConfigureRepositoryManager();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddSwaggerGen();
+
 var connectionString = "server=localhost;user=webmaster;password=PRINT45dull;database=portal";
 
 // Replace with your server version and type.
@@ -44,7 +52,6 @@ builder.Services.AddDbContext<RepositoryContext>(
 );
 
 
-//builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 
 builder.Services.AddIdentity<User, IdentityRole>(opt =>
 {
@@ -92,11 +99,45 @@ builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ICalenderRepository, CalenderRepository>();
 builder.Services.AddScoped<IUserAccessor, UserAccessor>();
-//builder.Services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
-builder.Services.AddControllers();
+builder.Services.AddControllers(o => o.Filters.Add(typeof(ResponseMappingFilter)));
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+
+        Version = "v1",
+        Title = "TTU Portal API",
+        Description = "RestFul API exposing TTU Portal Services",
+        TermsOfService = new Uri("https://example.com/terms"),
+        Contact = new OpenApiContact
+        {
+            Name = "Gad Ocansey",
+            Url = new Uri("https://example.com/contact")
+        },
+        License = new OpenApiLicense
+        {
+            Name = "Example License",
+            Url = new Uri("https://example.com/license")
+        }
+    });
+});
+
 builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
+if (app.Environment.IsDevelopment())
+{
+    //app.UseSwagger();
+    app.UseSwaggerUI();
+}
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+    options.RoutePrefix = string.Empty;
+});
 
 app.UseHttpsRedirection();
 

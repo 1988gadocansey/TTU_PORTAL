@@ -21,16 +21,7 @@ namespace Students.Controllers
         public async Task<IActionResult> GetMountedCourses()
         {
             var courses = await _mediator.Send(new GetMountedQuery());
-
-            if (courses != null)
-            {
-                return Ok(courses);
-            }
-
-            return NotFound("No mounted courses in database. Please contact faculty exams officer.");
+            return Ok(courses);
         }
-
-
-
     }
 }

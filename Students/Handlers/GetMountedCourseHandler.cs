@@ -6,10 +6,11 @@ using Students.Repository;
 using AutoMapper;
 using System.Security.Claims;
 using Students.Queries.GetMountedCourses;
+using Students.Exceptions;
 
 namespace Students.Handlers;
-[Authorize]
-public class GetMountedCourseHandler : IRequestHandler<GetMountedQuery, IList<MountedCourseDto>>
+
+public class GetMountedCourseHandler : IRequestHandler<GetMountedQuery, IEnumerable<MountedCourseDto>>
 {
 
 
@@ -18,6 +19,7 @@ public class GetMountedCourseHandler : IRequestHandler<GetMountedQuery, IList<Mo
     private readonly IRepositoryManager _repository;
     private readonly IMapper _mapper;
     private readonly IUserAccessor _userAccessor;
+
 
     public GetMountedCourseHandler(RepositoryContext dbContext, ICalenderRepository calenderRepository, IRepositoryManager repository, IMapper mapper, IUserAccessor userAccessor)
     {
@@ -29,8 +31,9 @@ public class GetMountedCourseHandler : IRequestHandler<GetMountedQuery, IList<Mo
         _userAccessor = userAccessor ?? throw new ArgumentNullException(nameof(userAccessor));
     }
 
-    public async Task<IList<MountedCourseDto>> Handle(GetMountedQuery request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<MountedCourseDto>> Handle(GetMountedQuery request, CancellationToken cancellationToken)
     {
+
         var claimsIdentity = _userAccessor.User;
         var userId = claimsIdentity?.FindFirst(ClaimTypes.Name)?.Value;
 
@@ -42,7 +45,8 @@ public class GetMountedCourseHandler : IRequestHandler<GetMountedQuery, IList<Mo
 
         var coursesVm = _mapper.Map<IEnumerable<MountedCourseDto>>(courses);
 
-        return null;
+        if (coursesVm == null) throw new NotFoundException(nameof(MountedCourseDto), request.ToString());
+        return coursesVm;
     }
 
 }

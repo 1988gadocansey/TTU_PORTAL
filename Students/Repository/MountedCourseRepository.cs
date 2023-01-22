@@ -17,24 +17,19 @@ namespace Students.Repository
             _unitOfWork = unitOfWork;
         }
 
-        async Task<IEnumerable<MountedCourse>> IMountedCourseRepository.GetAllCourses(int semester, string level, string programme, string years, CancellationToken cancellationToken)
+        async Task<IEnumerable<MountedCourse>> IMountedCourseRepository.GetAllCourses(int semester, string level,
+            string programme, string years, CancellationToken cancellationToken)
         {
-
-
             return await _repositoryContext.MountedCourses
                 .AsNoTracking()
-
-                       .Where(a => a.COURSE_SEMESTER == semester)
-                       .Where(a => a.PROGRAMME == programme)
-                       .Where(a => a.COURSE_LEVEL == level)
-                        .Where(a => a.COURSE_YEAR == years)
-                       .OrderBy(c => c.COURSE_TYPE)
-                       .OrderBy(c => c.Courses.COURSE_NAME)
-                       .Include(a => a.Courses)
-                       .ToListAsync(cancellationToken);
-
+                .Where(a => a.COURSE_SEMESTER == semester)
+                .Where(a => a.PROGRAMME == programme)
+                .Where(a => a.COURSE_LEVEL == level)
+                .Where(a => a.COURSE_YEAR == years)
+                .OrderBy(c => c.COURSE_TYPE)
+                .OrderBy(c => c.Courses.COURSE_NAME)
+                .Include(a => a.Courses)
+                .ToListAsync(cancellationToken);
         }
-
-
     }
 }
