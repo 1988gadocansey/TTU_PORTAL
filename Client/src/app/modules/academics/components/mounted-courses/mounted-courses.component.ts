@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { MountedCourse } from 'src/app/core/models/academics/mountedCourses';
+import MountedCourse from 'src/app/core/models/academics/mountedCourses';
 
 import { RepositoryService } from '../../../../core/services/repository.service';
 

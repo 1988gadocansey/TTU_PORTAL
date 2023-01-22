@@ -1,7 +1,7 @@
-export interface MountedCourse {
-    CourseName: string;
-    CourseCode: string;
-    CourseType: string;
+export default interface MountedCourse {
+    courseName: string;
+    courseCode: string;
+    courseType: string;
 
-    CourseCredit: number
+    courseCredit: number
 }
