@@ -26,8 +26,8 @@ namespace Students.Repository
                 .Where(a => a.PROGRAMME == programme)
                 .Where(a => a.COURSE_LEVEL == level)
                 .Where(a => a.COURSE_YEAR == years)
-                .OrderBy(c => c.COURSE_TYPE)
                 .OrderBy(c => c.Courses.COURSE_NAME)
+                .OrderBy(c => c.COURSE_TYPE)
                 .Include(a => a.Courses)
                 .ToListAsync(cancellationToken);
         }
