@@ -14,6 +14,10 @@ namespace Students.Repository
         private IDashBoardRepository _dashboardRepository;
         private IEventRepository _eventRepository;
 
+        private IPaymentRepository _paymentRepository;
+
+        private ITimeTableRepository _timetableRepository;
+
 
         public RepositoryManager(RepositoryContext repositoryContext, IUnitOfWork unitOfWork)
         {
@@ -75,6 +79,8 @@ namespace Students.Repository
             }
         }
 
+        //public IPaymentRepository Payment => throw new NotImplementedException();
+
         IEventRepository IRepositoryManager.Event
         {
             get
@@ -89,6 +95,30 @@ namespace Students.Repository
 
             }
         }
+
+        IPaymentRepository IRepositoryManager.Payment
+        {
+            get
+            {
+                if (_paymentRepository == null)
+                    _paymentRepository = new PaymentRepository(_repositoryContext);
+
+                return _paymentRepository;
+            }
+
+        }
+        ITimeTableRepository IRepositoryManager.TeachingTimeTable
+        {
+            get
+            {
+                if (_timetableRepository == null)
+                    _timetableRepository = new TimeTableRepository(_repositoryContext);
+
+                return _timetableRepository;
+            }
+
+        }
+
 
 
     }

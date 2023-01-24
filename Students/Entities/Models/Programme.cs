@@ -24,9 +24,8 @@ public record Programme : BaseEntity
     public string? HND_CODE { get; init; } = default!;
     public string? COMBINEDCODE { get; init; } = default!;
     public string? COMBINEDEPT { get; init; } = default!;
-
-    //public ICollection<Student>? students { get; } = new HashSet<Student>();
-    public virtual ICollection<Student>? students { get; private set; }
+    public virtual ICollection<Student>? Students { get; private set; }
+    public virtual ICollection<MountedCourse>? MountedCourses { get; private set; }
 
 
 }

@@ -8,6 +8,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { WelcomeRoutingModule } from './welcome-routing.module';
 import { InfoComponent } from './pages/info/info.component';
 import { TopinfoComponent } from './components/topinfo/topinfo.component';
+import { LatestpaymentsComponent } from './components/latestpayments/latestpayments.component';
+import { UpcominglecturesComponent } from './components/upcominglectures/upcominglectures.component';
+import { IssuesComponent } from './components/issues/issues.component';
 
 
 
@@ -16,6 +19,10 @@ import { TopinfoComponent } from './components/topinfo/topinfo.component';
     WelcomeComponent,
     InfoComponent,
     TopinfoComponent,
+    LatestpaymentsComponent,
+    UpcominglecturesComponent,
+    IssuesComponent
+
   ],
   imports: [
     CommonModule,

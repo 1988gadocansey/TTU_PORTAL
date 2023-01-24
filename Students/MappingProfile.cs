@@ -56,5 +56,27 @@ public class MappingProfile : Profile
             //.ForMember(u => u.EventType, opt => opt.MapFrom(x => Convert.ToInt64(x.eventType)))
             .ForMember(u => u.UserAGent, opt => opt.MapFrom(x => x.usergent))
             ;
+        CreateMap<AcademicRecord, ResitDto>()
+         .ForMember(u => u.courseCode, opt => opt.MapFrom(x => x.Course.Courses.COURSE_CODE))
+          .ForMember(u => u.grade, opt => opt.MapFrom(x => x.grade))
+           .ForMember(u => u.courseName, opt => opt.MapFrom(x => x.Course.Courses.COURSE_NAME));
+
+        CreateMap<Payment, PaymentDto>()
+      .ForMember(u => u.amount, opt => opt.MapFrom(x => x.AMOUNT))
+       .ForMember(u => u.bank, opt => opt.MapFrom(x => x.Banks.NAME))
+        .ForMember(u => u.feeType, opt => opt.MapFrom(x => x.PAYMENTTYPE))
+         .ForMember(u => u.date, opt => opt.MapFrom(x => x.BANK_DATE));
+
+        CreateMap<TeachingTimeTable, TeachingTimeTableDto>()
+   .ForMember(u => u.Venue, opt => opt.MapFrom(x => x.venue))
+     .ForMember(u => u.Classes, opt => opt.MapFrom(x => x.clase))
+    .ForMember(u => u.Begin, opt => opt.MapFrom(x => x.begin))
+     .ForMember(u => u.End, opt => opt.MapFrom(x => x.end))
+      .ForMember(u => u.Lecturer, opt => opt.MapFrom(x => x.vlecturer))
+       .ForMember(u => u.Day, opt => opt.MapFrom(x => x.day))
+        .ForMember(u => u.Course, opt => opt.MapFrom(x => x.MountedCoursesTtable.Courses.COURSE_NAME));
+
+
+
     }
 }

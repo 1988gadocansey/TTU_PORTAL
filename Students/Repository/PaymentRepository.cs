@@ -4,21 +4,30 @@ using Students.Entities.Models;
 
 namespace Students.Repository
 {
-    public class PaymentRepository : RepositoryBase<Payment>, IPaymentRepository
+    public class PaymentRepository : IPaymentRepository
     {
+        private RepositoryContext _repositoryContext;
+        private IUnitOfWork _unitOfWork;
+        private RepositoryContext repositoryContext;
+
+
+
         public PaymentRepository(RepositoryContext repositoryContext)
-            : base(repositoryContext)
         {
+            _repositoryContext = repositoryContext;
+
+
         }
-        public IEnumerable<Payment> GetAllPayments(bool trackChanges)
+
+        async Task<IEnumerable<Payment>> IPaymentRepository.GetPaymentsDashboard(int? StudentNo)
         {
-            IQueryable<Payment> payments = FindAll(trackChanges);
-
-            return payments.OrderBy(c => c.YEAR)
-                        .OrderBy(c => c.BANK_DATE)
-                        .Include(a => a.PAYMENTTYPE)
-                        .ToList();
-
+            return await _repositoryContext.Payments
+                .AsNoTracking()
+                .Where(c => c.Students.ID == StudentNo)
+                .OrderBy(c => c.BANK_DATE)
+                .Include(a => a.Banks)
+                .Take(3)
+                .ToListAsync();
         }
     }
 }

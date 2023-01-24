@@ -34,24 +34,31 @@ public class HomeController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetDashboard()
+    public async Task<IActionResult> GetDashboard(CancellationToken cancellationToken)
     {
-
-
-        var claimsIdentity = this.User.Identity as ClaimsIdentity;
-        var userId = claimsIdentity?.FindFirst(ClaimTypes.Name)?.Value;
-
-        var student = _repository.Student.GetStudentDetails(userId);
-
-        var studentinfo = _mapper.Map<DashBoardDto>(student);
-
-        _logger.LogInformation("Student visited dashboard details " + studentinfo.Programme);
 
         var calender = await _repository.Calender.GetCalender();
 
         var calenderdto = _mapper.Map<CalenderDto>(calender);
 
-        // lets created event of login
+
+        var claimsIdentity = this.User.Identity as ClaimsIdentity;
+        var userId = claimsIdentity?.FindFirst(ClaimTypes.Name)?.Value;
+
+
+        var student = _repository.Student.GetStudentDetails(userId);
+
+        var studentinfo = _mapper.Map<DashBoardDto>(student);
+
+        var payments = await _repository.Payment.GetPaymentsDashboard(student?.ID);
+
+        var paymentsDto = _mapper.Map<IEnumerable<PaymentDto>>(payments);
+
+        // up coming lectures timetable
+        var timetable = await _repository.TeachingTimeTable.GetUpComingLectures(student, Convert.ToInt16(calender.SEMESTER), calender.YEAR, cancellationToken);
+        var timetableDto = _mapper.Map<IEnumerable<TeachingTimeTableDto>>(timetable);
+
+
         var log = new Event
         {
             student = userId,
@@ -68,7 +75,9 @@ public class HomeController : ControllerBase
             {
 
                 calenderdto = calenderdto,
-                studentinfo = studentinfo
+                studentinfo = studentinfo,
+                payments = paymentsDto,
+                timetable = timetableDto
             });
 
 

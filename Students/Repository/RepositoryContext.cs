@@ -37,6 +37,9 @@ namespace Students.Repository
         public DbSet<Calender>? Calenders { get; set; }
 
         public DbSet<Event>? Events { get; set; }
+        public DbSet<Payment>? Payments { get; set; }
+        public DbSet<AcademicRecord>? AcademicRecords { get; set; }
+        public DbSet<TeachingTimeTable>? TeachingTimeTables { get; set; }
 
 
     }

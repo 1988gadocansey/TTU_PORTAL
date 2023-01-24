@@ -1,6 +1,6 @@
 namespace Students.Entities.DataTransferObjects
 {
-    public class DashBoardDto
+    public record DashBoardDto
     {
 
         public string? Cgpa { get; init; }

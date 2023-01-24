@@ -12,6 +12,9 @@
 
         IDashBoardRepository Student { get; }
 
+        IPaymentRepository Payment { get; }
+        ITimeTableRepository TeachingTimeTable { get; }
+
 
     }
 }
