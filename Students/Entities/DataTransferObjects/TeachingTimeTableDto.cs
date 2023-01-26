@@ -1,17 +1,17 @@
 namespace Students.Entities.DataTransferObjects;
 
-public record TeachingTimeTableDto
+public class TeachingTimeTableDto
 {
 
-    public string? Venue { get; init; }
-    public string? Begin { get; init; }
-    public string? End { get; init; }
+    public string? Venue { get; set; }
+    public string? Begin { get; set; }
+    public string? End { get; set; }
 
-    public string? Day { get; init; }
+    public string? Day { get; set; }
 
-    public string? Course { get; init; }
+    public string? Course { get; set; }
 
-    public string? Classes { get; init; }
+    public string? Classes { get; set; }
 
-    public string? Lecturer { get; init; }
+    public string? Lecturer { get; set; }
 }

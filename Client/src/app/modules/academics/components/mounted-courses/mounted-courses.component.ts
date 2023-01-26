@@ -20,7 +20,7 @@ export class MountedCoursesComponent {
     this.getCourses();
   }
   getCourses = () => {
-    this.repository.getAll().subscribe((data: MountedCourse[]) => {
+    this.repository.getMountedCourses().subscribe((data: MountedCourse[]) => {
       this.courses = data;
       console.log(this.courses);
     })

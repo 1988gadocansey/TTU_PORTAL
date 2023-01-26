@@ -2,13 +2,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 namespace Students.Entities.Models;
 [Table("tpoly_main_exams")]
-public record ExamTimeTable : BaseEntity{
+public record ExamTimeTable : BaseEntity
+{
     [Key]
-    public int? id { get; init; }
-    public string? session { get; init; }
+    public int id { get; init; } = default!;
+    public string? begin { get; init; }
+    public string? end { get; init; }
     public string? venue { get; init; }
+    public int vcourse { get; set; }
 
-    public string? index_range { get; init; }
-    public string? year { get; init; }
-    public string? res { get; init; }
+    [ForeignKey("vcourse")]
+    public MountedCourse? MountedCoursesTtable { get; set; }
+
+    [Column("class")]
+    public string? clase { get; init; }
+    public string? vlecturer { get; init; }
+    public string? day { get; init; }
 }

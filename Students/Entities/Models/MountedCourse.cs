@@ -26,8 +26,16 @@ public record MountedCourse : BaseEntity
     public string? COURSE_TYPE { get; set; }
 
 
-    [ForeignKey("Programme")]
+
     public string? PROGRAMME { get; set; }
+
+    [ForeignKey("PROGRAMME")]
+    public Programme Programmes { get; set; }
+
+
+
+
+
     public string? LECTURER { get; set; } = default!;
     public string? COURSE_YEAR { get; set; } = default!;
     public string? YEAR_GROUP { get; set; } = default!;

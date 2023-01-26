@@ -1,54 +1,7 @@
 <div class="flex flex-col">
   <div
     class="mb-6 flex flex-col rounded-2xl bg-white transition-shadow duration-500 last:mb-0 hover:shadow-lg dark:bg-slate-900/70"
-  >
-    <div class="flex-1 p-6">
-      <div class="block items-center justify-between md:flex">
-        <div class="mb-6 flex items-center justify-center md:mb-0">
-          <div class="block items-center justify-start md:flex">
-            <div class="mb-6 flex items-center justify-center md:mb-0">
-              <div class="mr-6 h-12 w-12">
-                <img
-                  src="https://avatars.dicebear.com/api/avataaars/Howell-Hand.svg"
-                  alt="Howell Hand"
-                  class="block h-auto w-full max-w-full rounded-full bg-gray-100 dark:bg-slate-800"
-                />
-              </div>
-            </div>
-            <div class="flex items-center justify-center">
-              <div class="overflow-hidden text-center md:text-left">
-                <h4 class="text-ellipsis text-xl">Howell Hand</h4>
-                <p class="text-gray-500 dark:text-slate-400">
-                  Mar 3, 2021 @ percy64
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="flex items-center justify-center">
-          <div
-            class="inline-flex items-center rounded-full border border-emerald-500 bg-emerald-500 py-1.5 px-4 text-sm capitalize leading-none text-white"
-          >
-            <span class="mr-2 inline-flex h-4 w-4 items-center justify-center"
-              ><svg
-                viewBox="0 0 24 24"
-                width="16"
-                height="16"
-                class="inline-block"
-              >
-                <path
-                  fill="currentColor"
-                  d="M16,6L18.29,8.29L13.41,13.17L9.41,9.17L2,16.59L3.41,18L9.41,12L13.41,16L19.71,9.71L22,12V6H16Z"
-                ></path></svg></span
-            ><span>70%</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!---->
-  </div>
-  <div
-    class="mb-6 flex flex-col rounded-2xl bg-white transition-shadow duration-500 last:mb-0 hover:shadow-lg dark:bg-slate-900/70"
+    *ngFor="let course of lectures.timetable; let i = index"
   >
     <div class="flex-1 p-6">
       <div class="block items-center justify-between md:flex">
@@ -65,9 +18,12 @@
             </div>
             <div class="flex items-center justify-center">
               <div class="overflow-hidden text-center md:text-left">
-                <h4 class="text-ellipsis text-xl">Hope Howe</h4>
+                <h4 class="text-ellipsis text-xl">
+                  {{ course.course | titlecase }}
+                </h4>
                 <p class="text-gray-500 dark:text-slate-400">
-                  Dec 1, 2021 @ dare.concepcion
+                  Starts {{ course.begin }}, Venue: {{ course.venue }} Lecturer
+                  {{ course.lecturer }}
                 </p>
               </div>
             </div>
@@ -89,54 +45,6 @@
                   d="M16,6L18.29,8.29L13.41,13.17L9.41,9.17L2,16.59L3.41,18L9.41,12L13.41,16L19.71,9.71L22,12V6H16Z"
                 ></path></svg></span
             ><span>68%</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!---->
-  </div>
-  <div
-    class="mb-6 flex flex-col rounded-2xl bg-white transition-shadow duration-500 last:mb-0 hover:shadow-lg dark:bg-slate-900/70"
-  >
-    <div class="flex-1 p-6">
-      <div class="block items-center justify-between md:flex">
-        <div class="mb-6 flex items-center justify-center md:mb-0">
-          <div class="block items-center justify-start md:flex">
-            <div class="mb-6 flex items-center justify-center md:mb-0">
-              <div class="mr-6 h-12 w-12">
-                <img
-                  src="https://avatars.dicebear.com/api/avataaars/Nelson-Jerde.svg"
-                  alt="Nelson Jerde"
-                  class="block h-auto w-full max-w-full rounded-full bg-gray-100 dark:bg-slate-800"
-                />
-              </div>
-            </div>
-            <div class="flex items-center justify-center">
-              <div class="overflow-hidden text-center md:text-left">
-                <h4 class="text-ellipsis text-xl">Nelson Jerde</h4>
-                <p class="text-gray-500 dark:text-slate-400">
-                  May 18, 2021 @ geovanni.kessler
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="flex items-center justify-center">
-          <div
-            class="inline-flex items-center rounded-full border border-yellow-500 bg-yellow-500 py-1.5 px-4 text-sm capitalize leading-none text-white"
-          >
-            <span class="mr-2 inline-flex h-4 w-4 items-center justify-center"
-              ><svg
-                viewBox="0 0 24 24"
-                width="16"
-                height="16"
-                class="inline-block"
-              >
-                <path
-                  fill="currentColor"
-                  d="M22,12L18,8V11H3V13H18V16L22,12Z"
-                ></path></svg></span
-            ><span>49%</span>
           </div>
         </div>
       </div>
