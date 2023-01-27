@@ -17,6 +17,7 @@ namespace Students.Repository
         private IPaymentRepository _paymentRepository;
 
         private ITimeTableRepository _timetableRepository;
+        private IAcademicRepository _academicRepository;
 
 
         public RepositoryManager(RepositoryContext repositoryContext, IUnitOfWork unitOfWork)
@@ -115,6 +116,17 @@ namespace Students.Repository
                     _timetableRepository = new TimeTableRepository(_repositoryContext);
 
                 return _timetableRepository;
+            }
+
+        }
+        IAcademicRepository IRepositoryManager.AcademicRecords
+        {
+            get
+            {
+                if (_academicRepository == null)
+                    _academicRepository = new AcademicRecordRepository(_repositoryContext);
+
+                return _academicRepository;
             }
 
         }

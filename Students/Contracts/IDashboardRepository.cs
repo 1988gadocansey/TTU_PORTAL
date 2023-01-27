@@ -4,18 +4,27 @@ namespace Students.Contracts
 {
     public interface IDashBoardRepository
     {
-        IEnumerable<Payment> GetLastPayment(bool trackChanges, Student student);
-        Student GetByEmail(User user);
+        public Task<Student> GetStudentDetails(string email, CancellationToken token);
 
-        Student? GetStudentDetails(string email);
+        public Task<IEnumerable<AcademicRecord>> GetAllIssues(Student student, CancellationToken token);
+        public Task<Decimal> GetTotalPayment(Student student, Calender calender, CancellationToken token);
 
-        DateTime GetStudentLastSeen(bool trackChanges, User user);
-        IEnumerable<Event> GetEvents(bool trackChanges);
+        public Task<Decimal> GetTotalFeesOwing(Student student, Calender calender, CancellationToken token);
 
-        Decimal TotalOwing(bool trackChanges, User user);
+        public Task<Decimal> GetTotalFeesCurrent(Student student, Calender calender, CancellationToken token);
 
-        Decimal TotalPaid(bool trackChanges, User user);
+        public Task<Decimal> getTotalPaymentCurrent(Student student, Calender calender, CancellationToken token);
 
+        public Task<Decimal> getTotalPaymentPrevious(Student student, Calender calender, CancellationToken token);
+
+        public Task<Decimal> GetTotalPaymentResit(Student student, Calender calender, CancellationToken token);
+
+        public Task<Decimal> GetTotalPaymentResitAll(Student student, CancellationToken token);
+
+        public Task<Decimal> GetTotalPaymentGraduation(Student student, Calender calender, CancellationToken token);
+        public Task<Decimal> GetTotalLatePenalty(Student student, Calender calender, CancellationToken token);
+
+        public Task<Decimal> GetFacultyDuesPaid(Student student, Calender calender, CancellationToken token);
 
 
     }

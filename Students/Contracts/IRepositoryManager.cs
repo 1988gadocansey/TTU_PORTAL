@@ -14,7 +14,7 @@
 
         IPaymentRepository Payment { get; }
         ITimeTableRepository TeachingTimeTable { get; }
-
+        IAcademicRepository AcademicRecords { get; }
 
     }
 }

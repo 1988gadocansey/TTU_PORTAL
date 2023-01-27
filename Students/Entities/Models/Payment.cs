@@ -20,7 +20,7 @@ public record Payment : BaseEntity
     public string? LEVEL { get; init; } = default!;
     public string? CURRENCY { get; init; } = default!;
     public string? PAYMENTTYPE { get; init; } = default!;
-    public string? AMOUNT { get; init; } = default!;
+    public decimal? AMOUNT { get; init; } = default!;
     public string? PAYMENTDETAILS { get; init; } = default!;
 
 

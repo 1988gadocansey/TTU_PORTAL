@@ -99,4 +99,6 @@ public record Student : BaseEntity
     public int? LIAISON { get; init; } = default!;
     public int? ASSUMPTION_DUTY { get; init; } = default!;
 
+    //public virtual ICollection<Payment> Payments { get; set; }
+
 }

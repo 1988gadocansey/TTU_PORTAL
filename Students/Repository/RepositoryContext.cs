@@ -43,5 +43,7 @@ namespace Students.Repository
 
         public DbSet<ExamTimeTable>? ExamTimeTables { get; set; }
 
+        public DbSet<Bills>? Bills { get; set; }
+
     }
 }

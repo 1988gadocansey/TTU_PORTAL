@@ -6,13 +6,15 @@ public record Bills : BaseEntity
 {
     [Key]
     public int? ID { get; init; }
-    public int PROGRAMME { get; set; }
-    [ForeignKey("PROGRAMME")]
-    public Programme? Programme { get; init; }
+    /*  public int PROGRAMME { get; set; }
+     [ForeignKey("PROGRAMME")]
+     public Programme? Programme { get; init; } */
+    public string? PROGRAMME { get; set; }
 
-    public int LEVEL { get; set; }
-    [ForeignKey("LEVEL")]
-    public Level? Level { get; init; }
+    public string LEVEL { get; set; }
+    /*  public int LEVEL { get; set; }
+     [ForeignKey("LEVEL")]
+     public Level? Level { get; init; } */
 
     public string? YEAR { get; init; }
     public string? SERVICES { get; init; }

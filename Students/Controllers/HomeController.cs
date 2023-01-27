@@ -46,11 +46,15 @@ public class HomeController : ControllerBase
         var userId = claimsIdentity?.FindFirst(ClaimTypes.Name)?.Value;
 
 
-        var student = _repository.Student.GetStudentDetails(userId);
+        var student = await _repository.Student.GetStudentDetails(userId, cancellationToken);
 
         var studentinfo = _mapper.Map<DashBoardDto>(student);
 
-        var payments = await _repository.Payment.GetPaymentsDashboard(student?.ID);
+        var payments = await _repository.Student.GetTotalPayment(student, calender, cancellationToken);
+
+        var owing = await _repository.Student.GetTotalFeesCurrent(student, calender, cancellationToken);
+
+        var balance = owing - payments;
 
         var paymentsDto = _mapper.Map<IEnumerable<PaymentDto>>(payments);
 
@@ -77,8 +81,10 @@ public class HomeController : ControllerBase
                 calenderdto = calenderdto,
                 studentinfo = studentinfo,
                 payments = paymentsDto,
-                timetable = timetableDto
-            });
+                timetable = timetableDto,
+                balance = balance,
+                owing = owing;
+    });
 
 
     }

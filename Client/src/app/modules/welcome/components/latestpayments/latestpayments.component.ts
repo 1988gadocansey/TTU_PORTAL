@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-latestpayments',
@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./latestpayments.component.scss']
 })
 export class LatestpaymentsComponent {
+
+  @Input() payments: any;
 
 }
