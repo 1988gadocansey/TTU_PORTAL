@@ -57,9 +57,9 @@ public class MappingProfile : Profile
             .ForMember(u => u.UserAGent, opt => opt.MapFrom(x => x.usergent))
             ;
         CreateMap<AcademicRecord, ResitDto>()
-         .ForMember(u => u.courseCode, opt => opt.MapFrom(x => x.Course.Courses.COURSE_CODE))
+         .ForMember(u => u.courseCode, opt => opt.MapFrom(x => x.Courses.Courses.COURSE_CODE))
           .ForMember(u => u.grade, opt => opt.MapFrom(x => x.grade))
-           .ForMember(u => u.courseName, opt => opt.MapFrom(x => x.Course.Courses.COURSE_NAME));
+           .ForMember(u => u.courseName, opt => opt.MapFrom(x => x.Courses.Courses.COURSE_NAME));
 
         CreateMap<Payment, PaymentDto>()
       .ForMember(u => u.amount, opt => opt.MapFrom(x => x.AMOUNT))

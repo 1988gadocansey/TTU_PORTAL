@@ -17,12 +17,12 @@ public record Bills : BaseEntity
      public Level? Level { get; init; } */
 
     public string? YEAR { get; init; }
-    public string? SERVICES { get; init; }
-    public string? EXAMINATION { get; init; }
+    public int? SERVICES { get; init; }
+    public int? EXAMINATION { get; init; }
 
-    public string? AUF { get; set; }
-    public string? PRACTICALS { get; set; }
-    public string? COMPENSATION { get; set; }
+    public int? AFUF { get; set; }
+    public int? PRACTICALS { get; set; }
+    public int? COMPENSATION { get; set; }
     public decimal? FEES { get; set; }
     public int? SRC { get; set; }
 

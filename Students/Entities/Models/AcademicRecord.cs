@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+
 namespace Students.Entities.Models;
 [Table("tpoly_academic_record")]
 public record AcademicRecord : BaseEntity
@@ -7,21 +9,21 @@ public record AcademicRecord : BaseEntity
     [Key]
     public int ID { get; init; }
 
-
+    //[JsonPropertyName("mountcourse")]
     public int course { get; set; }
 
     [ForeignKey("course")]
-    public MountedCourse? Course { get; set; }
+    public MountedCourse? Courses { get; set; }
 
     public int student { get; set; }
 
     [ForeignKey("student")]
-    public Student? Student { get; set; }
+    public Student? Students { get; set; }
 
     public string? level { get; set; }
 
     [ForeignKey("level")]
-    public Level? Level { get; set; }
+    public Level? Levels { get; set; }
 
     public decimal? quiz1 { get; init; } = default!;
     public decimal? quiz2 { get; init; } = default!;

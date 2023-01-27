@@ -37,7 +37,7 @@ public class GetMountedCourseHandler : IRequestHandler<GetMountedQuery, IEnumera
         var claimsIdentity = _userAccessor.User;
         var userId = claimsIdentity?.FindFirst(ClaimTypes.Name)?.Value;
 
-        var student = _repository.Student.GetStudentDetails(userId);
+        var student = await _repository.Student.GetStudentDetails(userId, cancellationToken);
 
         var calender = await _calenderRepository.GetCalender();
 

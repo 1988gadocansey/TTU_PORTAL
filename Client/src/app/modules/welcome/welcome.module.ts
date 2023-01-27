@@ -8,9 +8,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { WelcomeRoutingModule } from './welcome-routing.module';
 import { InfoComponent } from './pages/info/info.component';
 import { TopinfoComponent } from './components/topinfo/topinfo.component';
-import { LatestpaymentsComponent } from './components/latestpayments/latestpayments.component';
+
 import { UpcominglecturesComponent } from './components/upcominglectures/upcominglectures.component';
 import { IssuesComponent } from './components/issues/issues.component';
+import { FeebalanceComponent } from './components/feebalance/feebalance.component';
 
 
 
@@ -19,9 +20,10 @@ import { IssuesComponent } from './components/issues/issues.component';
     WelcomeComponent,
     InfoComponent,
     TopinfoComponent,
-    LatestpaymentsComponent,
+
     UpcominglecturesComponent,
-    IssuesComponent
+    IssuesComponent,
+    FeebalanceComponent
 
   ],
   imports: [

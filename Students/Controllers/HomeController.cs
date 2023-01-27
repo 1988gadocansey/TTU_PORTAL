@@ -50,13 +50,16 @@ public class HomeController : ControllerBase
 
         var studentinfo = _mapper.Map<DashBoardDto>(student);
 
-        var payments = await _repository.Student.GetTotalPayment(student, calender, cancellationToken);
+        var payments = await _repository.Student.getTotalPaymentCurrent(student, calender, cancellationToken);
 
         var owing = await _repository.Student.GetTotalFeesCurrent(student, calender, cancellationToken);
 
+        var issues = await _repository.Student.GetAllIssues(student, cancellationToken);
+
+
         var balance = owing - payments;
 
-        var paymentsDto = _mapper.Map<IEnumerable<PaymentDto>>(payments);
+        //var paymentsDto = _mapper.Map<IEnumerable<PaymentDto>>(payments);
 
         // up coming lectures timetable
         var timetable = await _repository.TeachingTimeTable.GetUpComingLectures(student, Convert.ToInt16(calender.SEMESTER), calender.YEAR, cancellationToken);
@@ -80,11 +83,12 @@ public class HomeController : ControllerBase
 
                 calenderdto = calenderdto,
                 studentinfo = studentinfo,
-                payments = paymentsDto,
+                payments = payments,
                 timetable = timetableDto,
                 balance = balance,
-                owing = owing;
-    });
+                owing = owing,
+                issues = issues
+            });
 
 
     }
