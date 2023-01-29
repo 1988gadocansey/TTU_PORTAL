@@ -1,6 +1,6 @@
 namespace Students.Entities.DataTransferObjects;
 
-public class TeachingTimeTableDto
+public record TeachingTimeTableDto
 {
 
     public string? Venue { get; set; }

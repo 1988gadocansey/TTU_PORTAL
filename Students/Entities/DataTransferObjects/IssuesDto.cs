@@ -1,13 +1,13 @@
 namespace Students.Entities.DataTransferObjects
 {
-    public record MountedCourseDto
+    public record IssuesDto
     {
 
         public string? CourseName { get; set; }
         public string? CourseCode { get; set; }
         public int? CourseCredit { get; set; }
 
-        public string? CourseType { get; set; }
+        public string? AcademicYear { get; set; }
 
     }
 }

@@ -11,7 +11,6 @@ import { TopinfoComponent } from './components/topinfo/topinfo.component';
 
 import { UpcominglecturesComponent } from './components/upcominglectures/upcominglectures.component';
 import { IssuesComponent } from './components/issues/issues.component';
-import { FeebalanceComponent } from './components/feebalance/feebalance.component';
 
 
 
@@ -22,8 +21,8 @@ import { FeebalanceComponent } from './components/feebalance/feebalance.componen
     TopinfoComponent,
 
     UpcominglecturesComponent,
-    IssuesComponent,
-    FeebalanceComponent
+    IssuesComponent
+
 
   ],
   imports: [

@@ -13,7 +13,7 @@ public record Student : BaseEntity
 
     public string? LEVEL { get; set; }
     [ForeignKey("LEVEL")]
-    public Level? Level { get; set; }
+    public Level? Levels { get; set; }
 
 
 

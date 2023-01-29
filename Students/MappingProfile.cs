@@ -77,6 +77,13 @@ public class MappingProfile : Profile
         .ForMember(u => u.Course, opt => opt.MapFrom(x => x.MountedCoursesTtable.Courses.COURSE_NAME));
 
 
+        CreateMap<AcademicRecord, IssuesDto>()
+         .ForMember(u => u.CourseCode, opt => opt.MapFrom(x => x.Courses.Courses.COURSE_CODE))
+          .ForMember(u => u.CourseName, opt => opt.MapFrom(x => x.Courses.Courses.COURSE_NAME))
+            .ForMember(u => u.CourseCredit, opt => opt.MapFrom(x => x.Courses.Courses.COURSE_CREDIT))
+            .ForMember(u => u.AcademicYear, opt => opt.MapFrom(x => x.Courses.COURSE_YEAR))
+         ;
+
 
     }
 }

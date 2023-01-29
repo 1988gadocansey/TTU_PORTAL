@@ -29,7 +29,7 @@ public record AcademicRecord : BaseEntity
     public decimal? quiz2 { get; init; } = default!;
     public decimal? quiz3 { get; init; } = default!;
     public decimal? midSem1 { get; init; } = default!;
-    public decimal? exam { get; init; } = default!;
+    public string? exam { get; init; } = default!;
     public decimal? total { get; init; } = default!;
     public char? grade { get; init; } = default!;
     public decimal? gpoint { get; init; } = default!;

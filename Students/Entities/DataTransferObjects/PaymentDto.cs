@@ -1,6 +1,6 @@
 namespace Students.Entities.DataTransferObjects;
 
-public class PaymentDto
+public record PaymentDto
 {
     public string? amount { get; set; } = default;
     public string? bank { get; set; } = default;

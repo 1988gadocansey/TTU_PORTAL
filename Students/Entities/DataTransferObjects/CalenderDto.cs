@@ -1,6 +1,6 @@
 namespace Students.Entities.DataTransferObjects
 {
-    public class CalenderDto
+    public record CalenderDto
     {
 
         public string? ResultOpened { get; init; }

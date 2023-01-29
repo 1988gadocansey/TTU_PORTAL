@@ -1,7 +1,7 @@
 using Students.Entities.Enums;
 namespace Students.Entities.DataTransferObjects
 {
-    public class EventDto
+    public record EventDto
     {
 
         public string? Hostname { get; }

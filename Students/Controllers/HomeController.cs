@@ -56,6 +56,8 @@ public class HomeController : ControllerBase
 
         var issues = await _repository.Student.GetAllIssues(student, cancellationToken);
 
+        var issuedDto = _mapper.Map<IEnumerable<IssuesDto>>(issues);
+
 
         var balance = owing - payments;
 
@@ -87,7 +89,7 @@ public class HomeController : ControllerBase
                 timetable = timetableDto,
                 balance = balance,
                 owing = owing,
-                issues = issues
+                issues = issuedDto
             });
 
 

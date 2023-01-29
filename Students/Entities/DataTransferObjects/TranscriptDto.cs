@@ -1,6 +1,6 @@
 namespace Students.Entities.DataTransferObjects
 {
-    public class TranscriptDto
+    public record TranscriptDto
     {
 
         public string? CourseName { get; set; }
