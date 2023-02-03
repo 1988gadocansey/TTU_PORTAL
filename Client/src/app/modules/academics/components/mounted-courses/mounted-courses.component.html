@@ -35,115 +35,125 @@
       </button>
     </div>
   </div>
-  <section class="p-6 xl:mx-auto xl:max-w-6xl">
-    <div class="mb-6 flex flex-col rounded-2xl bg-white dark:bg-slate-900/70">
-      <div class="flex-1">
-        <div
-          class="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden"
-          style="display: none"
-        >
+  <form [formGroup]="courseRegistrationForm" (ngSubmit)="saveForm()">
+    <section class="p-6 xl:mx-auto xl:max-w-6xl">
+      <div class="mb-6 flex flex-col rounded-2xl bg-white dark:bg-slate-900/70">
+        <div class="flex-1">
           <div
-            class="absolute inset-0 bg-gradient-to-tr from-gray-700 via-gray-900 to-gray-700 opacity-90 dark:from-gray-700 dark:via-gray-900 dark:to-gray-700"
-          ></div>
-          <div
-            class="max-h-modal z-50 flex w-11/12 flex-col rounded-2xl bg-white shadow-lg dark:bg-slate-900 md:w-3/5 lg:w-2/5 xl:w-4/12"
+            class="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden"
             style="display: none"
           >
-            <div class="flex-1 p-6">
-              <div class="mb-3 flex items-center justify-between">
-                <h1 class="text-2xl">Sample modal</h1>
+            <div
+              class="absolute inset-0 bg-gradient-to-tr from-gray-700 via-gray-900 to-gray-700 opacity-90 dark:from-gray-700 dark:via-gray-900 dark:to-gray-700"
+            ></div>
+            <div
+              class="max-h-modal z-50 flex w-11/12 flex-col rounded-2xl bg-white shadow-lg dark:bg-slate-900 md:w-3/5 lg:w-2/5 xl:w-4/12"
+              style="display: none"
+            >
+              <div class="flex-1 p-6">
+                <div class="mb-3 flex items-center justify-between">
+                  <h1 class="text-2xl">Sample modal</h1>
+                </div>
+                <div class="space-y-3">
+                  <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
+                  <p>This is sample modal</p>
+                </div>
               </div>
-              <div class="space-y-3">
-                <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-                <p>This is sample modal</p>
-              </div>
+              <footer class="p-6">
+                <div class="-mb-3 flex flex-wrap items-center justify-start">
+                  <button
+                    class="mr-3 mb-3 inline-flex cursor-pointer items-center justify-center whitespace-nowrap rounded border border-blue-600 bg-blue-600 py-2 px-3 text-white ring-blue-300 transition-colors duration-150 last:mr-0 focus:outline-none focus:ring hover:border-blue-700 hover:bg-blue-700 dark:border-blue-500 dark:bg-blue-500 dark:ring-blue-700 hover:dark:border-blue-600 hover:dark:bg-blue-600"
+                    type="button"
+                  >
+                    <!----><span class="px-2">Done</span></button
+                  ><!---->
+                </div>
+              </footer>
             </div>
-            <footer class="p-6">
-              <div class="-mb-3 flex flex-wrap items-center justify-start">
-                <button
-                  class="mr-3 mb-3 inline-flex cursor-pointer items-center justify-center whitespace-nowrap rounded border border-blue-600 bg-blue-600 py-2 px-3 text-white ring-blue-300 transition-colors duration-150 last:mr-0 focus:outline-none focus:ring hover:border-blue-700 hover:bg-blue-700 dark:border-blue-500 dark:bg-blue-500 dark:ring-blue-700 hover:dark:border-blue-600 hover:dark:bg-blue-600"
-                  type="button"
-                >
-                  <!----><span class="px-2">Done</span></button
-                ><!---->
-              </div>
-            </footer>
+          </div>
+          <table class="w-full table-auto">
+            <thead class="text-xs uppercase text-gray-400 dark:text-night-300">
+              <tr>
+                <th class="py-3 text-left">#</th>
+                <th class="py-3 text-left">No</th>
+                <th class="py-3 text-left">Course</th>
+                <th class="py-3 text-center">Code</th>
+                <th class="py-3 text-center">Credit</th>
+                <th class="py-3 text-center">Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                class="border-b border-dashed border-gray-200 hover:bg-gray-100 dark:border-night-500 dark:hover:bg-night-600"
+                ng-reflect-auction="[object Object]"
+                *ngFor="let course of courses; let i = index"
+              >
+                <td *ngIf="course.courseType == '0'; else templateName">
+                  <label
+                    class="checkbox check-radio-success mr-6 mb-3 last:mr-0"
+                    ><input
+                      type="checkbox"
+                      name="sample-checkbox-two"
+                      value="ipsum"
+                    /><span class="check"></span>
+                  </label>
+                </td>
+                <ng-template #templateName>
+                  <td>
+                    <label class="radio mr-6 mb-3 last:mr-0"
+                      ><input
+                        type="radio"
+                        name="sample-radio-two"
+                        value="two"
+                      /><span class="check"></span>
+                    </label></td
+                ></ng-template>
+                <td>{{ i + 1 }}</td>
+                <input
+                  id="courseId"
+                  type="number"
+                  [value]="sample"
+                  formControlName="courseId"
+                />
+
+                <td class="py-2 pl-2 text-left">
+                  {{ course.courseName | titlecase }}
+                </td>
+                <td class="py-2 pl-2 text-center">
+                  {{ course.courseCode | titlecase }}
+                </td>
+                <td class="py-2 pl-2 text-center">{{ course.courseCredit }}</td>
+                <td class="py-2 pl-2 text-center">
+                  {{ course.courseType == "0" ? "Core" : "Elective" }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!---->
+      </div>
+      <div class="mb-4 flex justify-between">
+        <div class="inline-block">
+          <h3 class="font-semibold text-gray-900 dark:text-white">
+            Selected to Register
+          </h3>
+          <div
+            class="space-x-1 text-xs font-medium text-gray-400 dark:text-night-300"
+          >
+            <a href="" class="hover:text-primary-500">Total Selected</a
+            ><span> - Total {{ courses.length }}</span>
           </div>
         </div>
-        <table class="w-full table-auto">
-          <thead class="text-xs uppercase text-gray-400 dark:text-night-300">
-            <tr>
-              <th class="py-3 text-left">#</th>
-              <th class="py-3 text-left">No</th>
-              <th class="py-3 text-left">Course</th>
-              <th class="py-3 text-center">Code</th>
-              <th class="py-3 text-center">Credit</th>
-              <th class="py-3 text-center">Type</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              class="border-b border-dashed border-gray-200 hover:bg-gray-100 dark:border-night-500 dark:hover:bg-night-600"
-              ng-reflect-auction="[object Object]"
-              *ngFor="let course of courses; let i = index"
-            >
-              <td *ngIf="course.courseType == '0'; else templateName">
-                <label class="checkbox check-radio-success mr-6 mb-3 last:mr-0"
-                  ><input
-                    type="checkbox"
-                    name="sample-checkbox-two"
-                    value="ipsum"
-                  /><span class="check"></span>
-                </label>
-              </td>
-              <ng-template #templateName>
-                <td>
-                  <label class="radio mr-6 mb-3 last:mr-0"
-                    ><input
-                      type="radio"
-                      name="sample-radio-two"
-                      value="two"
-                    /><span class="check"></span>
-                  </label></td
-              ></ng-template>
-              <td>{{ i + 1 }}</td>
-
-              <td class="py-2 pl-2 text-left">
-                {{ course.courseName | titlecase }}
-              </td>
-              <td class="py-2 pl-2 text-center">
-                {{ course.courseCode | titlecase }}
-              </td>
-              <td class="py-2 pl-2 text-center">{{ course.courseCredit }}</td>
-              <td class="py-2 pl-2 text-center">
-                {{ course.courseType == "0" ? "Core" : "Elective" }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!---->
-    </div>
-    <div class="mb-4 flex justify-between">
-      <div class="inline-block">
-        <h3 class="font-semibold text-gray-900 dark:text-white">
-          Selected to Register
-        </h3>
-        <div
-          class="space-x-1 text-xs font-medium text-gray-400 dark:text-night-300"
-        >
-          <a href="" class="hover:text-primary-500">Total Selected</a
-          ><span> - Total {{ courses.length }}</span>
+        <div class="inline-block space-x-4">
+          <button
+            type="submit"
+            class="flex-none rounded-md bg-primary-500 px-4 py-2.5 text-xs font-semibold text-white hover:bg-primary-600"
+          >
+            Register
+          </button>
         </div>
       </div>
-      <div class="inline-block space-x-4">
-        <button
-          class="flex-none rounded-md bg-primary-500 px-4 py-2.5 text-xs font-semibold text-white hover:bg-primary-600"
-        >
-          Register
-        </button>
-      </div>
-    </div>
-  </section>
+    </section>
+  </form>
 </ng-container>

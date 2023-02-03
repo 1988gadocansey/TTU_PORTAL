@@ -8,6 +8,9 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './home/home.component';
 import { ErrorHandlerService } from './core/services/error-handler.service';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { LoadingInterceptor } from './core/interceptor/loading.interceptor';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -16,7 +19,7 @@ export function tokenGetter() {
 
 @NgModule({
 
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent, HomeComponent, SpinnerComponent],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, SocialLoginModule,
     JwtModule.forRoot({
       config: {
@@ -32,8 +35,17 @@ export function tokenGetter() {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorHandlerService,
-      multi: true
+      multi: true,
+
+
     },
+    /*  {
+       provide: HTTP_INTERCEPTORS,
+       useClass: LoadingInterceptor,
+       multi: true,
+ 
+ 
+     }, */
     {
       provide: 'SocialAuthServiceConfig',
 
