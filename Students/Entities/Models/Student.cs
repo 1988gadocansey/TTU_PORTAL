@@ -6,7 +6,7 @@ namespace Students.Entities.Models;
 public record Student : BaseEntity
 {
     [Key]
-    public int? ID { get; init; }
+    public int ID { get; init; }
     public string? STNO { get; init; }
 
     public string? INDEXNO { get; init; }

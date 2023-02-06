@@ -1,14 +1,12 @@
-using Microsoft.AspNetCore.Authorization;
 using Students.Entities.DataTransferObjects;
 using MediatR;
 using Students.Contracts;
 using Students.Repository;
 using AutoMapper;
 using System.Security.Claims;
-using Students.Queries.GetMountedCourses;
 using Students.Exceptions;
 
-namespace Students.Handlers;
+namespace Students.Queries.GetMountedCourses;
 
 public class GetMountedCourseHandler : IRequestHandler<GetMountedQuery, IEnumerable<MountedCourseDto>>
 {

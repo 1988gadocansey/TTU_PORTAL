@@ -4,6 +4,7 @@ import MountedCourse from 'src/app/core/models/academics/mountedCourses';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RepositoryService } from '../../../../core/services/repository.service';
 import { FormArray, FormBuilder } from '@angular/forms';
+import { MountedCourseDto } from 'src/app/core/models/academics/mountedCourseDto';
 
 @Component({
   selector: 'app-mounted-courses',
@@ -12,21 +13,20 @@ import { FormArray, FormBuilder } from '@angular/forms';
 })
 export class MountedCoursesComponent {
   public courseRegistrationForm: FormGroup;
-
   submitted = false;
-  sample: number = 10;
-
+  public id: Number = 0;
+  public mountedCourseToServer: MountedCourseDto[] = []
   public courses: MountedCourse[] = [];
+totalCredit: any;
 
   constructor(private repository: RepositoryService, private fb: FormBuilder) {
 
     this.courseRegistrationForm = this.fb.group({
-      //firstName: ['', Validators.required],
       courseCode: [],
       courseId: [],
-      level: [],
-      yearGroup: [],
+      courseLecturer: [],
       courseCredit: [],
+      courseLevel: ['', Validators.required],
       totalCredit: [],
       electiveCourses: [],
       coreCourses: [],
@@ -52,8 +52,16 @@ export class MountedCoursesComponent {
      this.personForm.controls["lastName"].setValue(this.person.lastName);
    }
   */
+
   saveForm() {
-    alert("registering course");
-    console.log("dssdksjdksd");
+    console.warn(this.courseRegistrationForm.value);
+    /*  this.postService.create(this.form.value).subscribe((res:any) => {
+       console.log('Post created successfully!');
+       this.router.navigateByUrl('post/index');
+  }) */
+    let body = {
+      //name: this.courseRegistrationForm.cou,
+      //age: value.age
+    }
   }
 }

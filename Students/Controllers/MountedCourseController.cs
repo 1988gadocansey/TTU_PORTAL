@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using MediatR;
 using Students.Queries.GetMountedCourses;
+using Students.Commands.CourseRegistration;
 
 namespace Students.Controllers
 {
@@ -18,10 +19,15 @@ namespace Students.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetMountedCourses()
+        public async Task<ActionResult> GetMountedCourses()
         {
             var courses = await _mediator.Send(new GetMountedQuery());
             return Ok(courses);
+        }
+        [HttpPost]
+        public async Task<ActionResult<int>> RegisterCourse(RegisterCourseCommandHandler command)
+        {
+            return await _mediator.Send(command);
         }
     }
 }

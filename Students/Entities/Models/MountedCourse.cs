@@ -5,7 +5,7 @@ namespace Students.Entities.Models;
 public record MountedCourse : BaseEntity
 {
     [Key]
-    public int? ID { get; set; }
+    public int ID { get; set; }
 
 
 

@@ -19,7 +19,13 @@ public class MappingProfile : Profile
             .ForMember(c => c.CourseName, opt => opt.MapFrom(x => x.Courses.COURSE_NAME))
             .ForMember(b => b.CourseCode, opt => opt.MapFrom(b => b.Courses.COURSE_CODE))
             .ForMember(x => x.CourseType, opt => opt.MapFrom(x => x.COURSE_TYPE))
-            .ForMember(x => x.CourseCredit, opt => opt.MapFrom(x => x.COURSE_CREDIT));
+            .ForMember(x => x.CourseCredit, opt => opt.MapFrom(x => x.COURSE_CREDIT))
+            .ForMember(x => x.CourseId, opt => opt.MapFrom(x => x.ID))
+            .ForMember(x => x.CourseLecturer, opt => opt.MapFrom(x => x.LECTURER))
+             .ForMember(x => x.CourseLevel, opt => opt.MapFrom(x => x.COURSE_LEVEL))
+
+
+            ;
 
 
         CreateMap<Course, CourseDto>()

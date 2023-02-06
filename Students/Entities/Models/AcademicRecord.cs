@@ -25,22 +25,25 @@ public record AcademicRecord : BaseEntity
     [ForeignKey("level")]
     public Level? Levels { get; set; }
 
-    public decimal? quiz1 { get; init; } = default!;
-    public decimal? quiz2 { get; init; } = default!;
-    public decimal? quiz3 { get; init; } = default!;
-    public decimal? midSem1 { get; init; } = default!;
-    public string? exam { get; init; } = default!;
-    public decimal? total { get; init; } = default!;
-    public char? grade { get; init; } = default!;
-    public decimal? gpoint { get; init; } = default!;
+    public decimal quiz1 { get; set; } = default!;
+    public decimal? quiz2 { get; set; } = default!;
+    public decimal? quiz3 { get; set; } = default!;
+    public decimal? midSem1 { get; set; } = default!;
+    public string? exam { get; set; } = default!;
+    public decimal? total { get; set; } = default!;
+    public char grade { get; set; } = default!;
+    public decimal gpoint { get; set; } = default!;
 
-    public string? sem { get; init; } = default!;
-    public string? year { get; init; } = default!;
-    public string? yrgp { get; init; } = default!;
+    public string sem { get; set; } = default!;
+    public string year { get; set; } = default!;
+
+    public string lecturer { get; set; } = default!;
+
+    public string yrgp { get; set; } = default!;
     public string? groups { get; init; } = default!;
     public string? resit { get; init; } = default!;
     public string? wesit { get; init; } = default!;
     public string? sup { get; init; } = default!;
-    public string? dateRegistered { get; init; } = default!;
+    public string? dateRegistered { get; set; } = default!;
 
 }

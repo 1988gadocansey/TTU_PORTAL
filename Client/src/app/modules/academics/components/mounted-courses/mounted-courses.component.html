@@ -87,6 +87,7 @@
                 class="border-b border-dashed border-gray-200 hover:bg-gray-100 dark:border-night-500 dark:hover:bg-night-600"
                 ng-reflect-auction="[object Object]"
                 *ngFor="let course of courses; let i = index"
+                #totalCredit
               >
                 <td *ngIf="course.courseType == '0'; else templateName">
                   <label
@@ -110,12 +111,46 @@
                 ></ng-template>
                 <td>{{ i + 1 }}</td>
                 <input
-                  id="courseId"
-                  type="number"
-                  [value]="sample"
-                  formControlName="courseId"
+                  required=""
+                  id="courseLevel"
+                  type="hidden"
+                  formControlName="courseLevel"
+                  [(ngModel)]="course.courseLevel"
                 />
-
+                <input
+                  required=""
+                  id="courseCode"
+                  type="hidden"
+                  formControlName="courseCode"
+                  [(ngModel)]="course.courseCode"
+                />
+                <input
+                  required=""
+                  id="courseCredit"
+                  type="hidden"
+                  formControlName="courseCredit"
+                  [(ngModel)]="course.courseCredit"
+                />
+                <input
+                  required=""
+                  id="courseId"
+                  type="hidden"
+                  formControlName="courseId"
+                  [(ngModel)]="course.courseId"
+                />
+                <input
+                  required=""
+                  id="courseLecturer"
+                  type="hidden"
+                  formControlName="courseLecturer"
+                  [(ngModel)]="course.courseLecturer"
+                />
+                <input
+                  required=""
+                  id="totalCredit"
+                  type="hidden"
+                  formControlName="totalCredit"
+                />
                 <td class="py-2 pl-2 text-left">
                   {{ course.courseName | titlecase }}
                 </td>
@@ -147,6 +182,7 @@
         </div>
         <div class="inline-block space-x-4">
           <button
+            *ngIf="courseRegistrationForm.valid"
             type="submit"
             class="flex-none rounded-md bg-primary-500 px-4 py-2.5 text-xs font-semibold text-white hover:bg-primary-600"
           >
