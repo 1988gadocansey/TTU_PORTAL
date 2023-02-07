@@ -35,7 +35,11 @@
       </button>
     </div>
   </div>
-  <form [formGroup]="courseRegistrationForm" (ngSubmit)="saveForm()">
+  <form
+    [formGroup]="courseRegistrationForm"
+    (ngSubmit)="saveForm()"
+    method="post"
+  >
     <section class="p-6 xl:mx-auto xl:max-w-6xl">
       <div class="mb-6 flex flex-col rounded-2xl bg-white dark:bg-slate-900/70">
         <div class="flex-1">
@@ -182,7 +186,6 @@
         </div>
         <div class="inline-block space-x-4">
           <button
-            *ngIf="courseRegistrationForm.valid"
             type="submit"
             class="flex-none rounded-md bg-primary-500 px-4 py-2.5 text-xs font-semibold text-white hover:bg-primary-600"
           >

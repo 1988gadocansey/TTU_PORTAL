@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Students.Entities.DataTransferObjects
+namespace Students.Entities.Dto
 {
     public class TwoFactorDto
     {

@@ -1,7 +1,7 @@
 using System.Security.Claims;
 using AutoMapper;
 using Students.Contracts;
-using Students.Entities.DataTransferObjects;
+using Students.Entities.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Students.Repository;
 using Students.Entities.Models;

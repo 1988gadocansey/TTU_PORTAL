@@ -1,4 +1,4 @@
-namespace Students.Entities.DataTransferObjects
+namespace Students.Entities.Dto
 {
     public record IssuesDto
     {

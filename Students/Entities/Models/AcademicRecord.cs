@@ -37,7 +37,7 @@ public record AcademicRecord : BaseEntity
     public string sem { get; set; } = default!;
     public string year { get; set; } = default!;
 
-    public string lecturer { get; set; } = default!;
+    public int lecturer { get; set; } = default!;
 
     public string yrgp { get; set; } = default!;
     public string? groups { get; init; } = default!;

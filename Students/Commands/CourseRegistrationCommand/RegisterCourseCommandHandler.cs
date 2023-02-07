@@ -5,17 +5,17 @@ using Students.Repository;
 using Students.Entities.Models;
 
 namespace Students.Commands.CourseRegistration;
-public record CreateCourseRegistrationCommand : IRequest<int>
+public record CreateCourseRegistrationCommand : IRequest<Unit>
 {
-    public int CourseId { get; init; }
-    public string? CourseCode { get; init; }
-    public string? CourseLevel { get; init; }
-    public int? CourseCredit { get; init; }
-    public string? CourseType { get; init; }
-    public string? CourseName { get; init; }
+    public int courseId { get; init; }
+    public string? courseCode { get; init; }
+    public string? courseLevel { get; init; }
+    public int? courseCredit { get; init; }
+    public string? courseType { get; init; }
+    public string? courseName { get; init; }
 
 }
-public class RegisterCourseCommandHandler : IRequestHandler<CreateCourseRegistrationCommand, int>
+public class RegisterCourseCommandHandler : IRequestHandler<CreateCourseRegistrationCommand, Unit>
 {
     private readonly RepositoryContext _dbContext;
     private readonly IRepositoryManager _repository;
@@ -32,7 +32,7 @@ public class RegisterCourseCommandHandler : IRequestHandler<CreateCourseRegistra
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<int> Handle(CreateCourseRegistrationCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(CreateCourseRegistrationCommand request, CancellationToken cancellationToken)
     {
         var Calender = await _calenderRepository.GetCalender();
         var Student = _userAccessor.User;
@@ -44,7 +44,7 @@ public class RegisterCourseCommandHandler : IRequestHandler<CreateCourseRegistra
          CourseRegistration.COURSE_LEVEL = request.CourseLevel;
          CourseRegistration.COURSE_SEMESTER = Convert.ToInt16(Calender.SEMESTER);
          CourseRegistration.COURSE_YEAR = Calender.YEAR; */
-        CourseRegistration.course = request.CourseId;
+        CourseRegistration.course = request.courseId;
         CourseRegistration.dateRegistered = Convert.ToString(DateTime.UtcNow);
         CourseRegistration.student = StudentDetails.ID;
         CourseRegistration.sem = Calender.SEMESTER;
@@ -53,10 +53,10 @@ public class RegisterCourseCommandHandler : IRequestHandler<CreateCourseRegistra
         CourseRegistration.grade = 'F';
         CourseRegistration.gpoint = 0.0M;
         CourseRegistration.level = StudentDetails.LEVEL;
-        CourseRegistration.lecturer = "Lecturer";
+        CourseRegistration.lecturer = 1201610;
         await _dbContext.AcademicRecords.AddAsync(CourseRegistration);
         await _dbContext.SaveChangesAsync(cancellationToken);
         await _unitOfWork.CommitAsync();
-        return CourseRegistration.ID;
+        return Unit.Value;
     }
 }

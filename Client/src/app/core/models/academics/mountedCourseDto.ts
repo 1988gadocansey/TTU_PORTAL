@@ -1,4 +1,4 @@
-export class MountedCourseDto {
+export interface MountedCourseDto {
     CourseId?: number;
     CourseName?: string;
     CourseCode?: string;

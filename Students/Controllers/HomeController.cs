@@ -1,7 +1,7 @@
 using System.Security.Claims;
 using AutoMapper;
 using Students.Contracts;
-using Students.Entities.DataTransferObjects;
+using Students.Entities.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Students.Repository;
 using Students.Entities.Models;
@@ -13,8 +13,7 @@ namespace Students.Controllers;
 
 [Route("api/dashboard")]
 [Authorize]
-[ApiController]
-public class HomeController : ControllerBase
+public class HomeController : ApiControllerBase
 {
     private readonly IRepositoryManager _repository;
     private readonly IMapper _mapper;

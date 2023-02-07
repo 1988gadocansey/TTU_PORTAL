@@ -1,4 +1,4 @@
-﻿using Students.Entities.DataTransferObjects;
+﻿using Students.Entities.Dto;
 using Students.Entities.Models;
 using Google.Apis.Auth;
 using Microsoft.AspNetCore.Identity;
@@ -15,7 +15,7 @@ namespace Students.JwtFeatures
         private readonly IConfigurationSection _jwtSettings;
         private readonly IConfigurationSection _goolgeSettings;
         private readonly UserManager<User> _userManager;
-        
+
         public JwtHandler(IConfiguration configuration, UserManager<User> userManager)
         {
             _configuration = configuration;

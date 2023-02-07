@@ -1,7 +1,7 @@
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Students.Entities.DataTransferObjects;
+using Students.Entities.Dto;
 
 namespace Students.Filters;
 public class ResponseMappingFilter : IActionFilter

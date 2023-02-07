@@ -1,4 +1,4 @@
-using Students.Entities.DataTransferObjects;
+using Students.Entities.Dto;
 using MediatR;
 using Students.Contracts;
 using Students.Repository;

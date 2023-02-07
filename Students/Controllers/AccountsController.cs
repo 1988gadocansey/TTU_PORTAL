@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Students.Entities.DataTransferObjects;
+using Students.Entities.Dto;
 using Students.Entities.Models;
 using Students.JwtFeatures;
 using EmailService;

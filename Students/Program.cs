@@ -100,6 +100,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ICalenderRepository, CalenderRepository>();
 builder.Services.AddScoped<IUserAccessor, UserAccessor>();
 builder.Services.AddControllers(o => o.Filters.Add(typeof(ResponseMappingFilter)));
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerGen(options =>
@@ -126,6 +127,8 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())

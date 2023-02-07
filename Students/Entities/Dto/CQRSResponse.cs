@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace Students.Entities.DataTransferObjects;
+namespace Students.Entities.Dto;
 public record CQRSResponse
 {
     public HttpStatusCode StatusCode { get; init; } = HttpStatusCode.OK;

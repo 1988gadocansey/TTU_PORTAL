@@ -17,7 +17,7 @@ export class MountedCoursesComponent {
   public id: Number = 0;
   public mountedCourseToServer: MountedCourseDto[] = []
   public courses: MountedCourse[] = [];
-totalCredit: any;
+  totalCredit: any;
 
   constructor(private repository: RepositoryService, private fb: FormBuilder) {
 
@@ -26,7 +26,7 @@ totalCredit: any;
       courseId: [],
       courseLecturer: [],
       courseCredit: [],
-      courseLevel: ['', Validators.required],
+      courseLevel: [],
       totalCredit: [],
       electiveCourses: [],
       coreCourses: [],
@@ -55,13 +55,10 @@ totalCredit: any;
 
   saveForm() {
     console.warn(this.courseRegistrationForm.value);
-    /*  this.postService.create(this.form.value).subscribe((res:any) => {
-       console.log('Post created successfully!');
-       this.router.navigateByUrl('post/index');
-  }) */
-    let body = {
-      //name: this.courseRegistrationForm.cou,
-      //age: value.age
-    }
+
+    this.repository.registerCourses(this.courseRegistrationForm.value).subscribe((res: any) => {
+      console.log('course registered successfully!');
+      // this.router.navigateByUrl('post/index');
+    })
   }
 }

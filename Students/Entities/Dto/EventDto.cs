@@ -1,5 +1,5 @@
 using Students.Entities.Enums;
-namespace Students.Entities.DataTransferObjects
+namespace Students.Entities.Dto
 {
     public record EventDto
     {
