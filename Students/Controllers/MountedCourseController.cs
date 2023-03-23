@@ -9,7 +9,6 @@ namespace Students.Controllers
     [Authorize]
     public class MountedCourseController : ApiControllerBase
     {
-
         [HttpGet]
         public async Task<ActionResult> GetMountedCourses()
         {

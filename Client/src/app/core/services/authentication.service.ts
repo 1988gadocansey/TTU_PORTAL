@@ -10,28 +10,38 @@ import { CustomEncoder } from '../../core/services/custom-encoder';
 import { SocialAuthService, SocialUser } from "@abacritt/angularx-social-login";
 import { GoogleLoginProvider } from "@abacritt/angularx-social-login";
 import { ExternalAuthDto } from '../../core/models/externalAuth/externalAuthDto.model';
+import { ForgotPasswordDto } from '../models/forgotPasswordDto.model';
+import { ResetPasswordDto } from '../models/resetPasswordDto.model';
+import { TwoFactorDto } from '../models/twoFactorDto.model';
+import { RegistrationResponseDto } from '../models/response/registrationResponseDto.model';
+import { UserForRegistrationDto } from '../models/user/userForRegistrationDto.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
+  public forgotPassword = (route: string, body: ForgotPasswordDto) => {
+    return this.http.post(this.createCompleteRoute(route, this.envUrl.urlAddress), body);
+  }
+
+  public resetPassword = (route: string, body: ResetPasswordDto) => {
+    return this.http.post(this.createCompleteRoute(route, this.envUrl.urlAddress), body);
+  }
   private authChangeSub = new Subject<boolean>();
   private extAuthChangeSub = new Subject<SocialUser>();
   public authChanged = this.authChangeSub.asObservable();
   public extAuthChanged = this.extAuthChangeSub.asObservable();
   public isExternalAuth: boolean = false;
-
-
   public authUser: SocialUser | any;
   public loggedIn: boolean | any;
 
+  public registerUser = (route: string, body: UserForRegistrationDto) => {
+    return this.http.post<RegistrationResponseDto>(this.createCompleteRoute(route, this.envUrl.urlAddress), body);
+  }
 
   constructor(private http: HttpClient, private envUrl: EnvironmentUrlService,
     private jwtHelper: JwtHelperService, private externalAuthService: SocialAuthService) {
-
     // this.authService.authState.subscribe((user)
-
-
     this.externalAuthService.authState.subscribe((user) => {
       this.extAuthChangeSub.next(user);
       this.isExternalAuth = true;
@@ -39,7 +49,9 @@ export class AuthenticationService {
   }
 
 
-
+  public twoStepLogin = (route: string, body: TwoFactorDto) => {
+    return this.http.post<AuthResponseDto>(this.createCompleteRoute(route, this.envUrl.urlAddress), body);
+  }
   public loginUser = (route: string, body: UserForAuthenticationDto) => {
     return this.http.post<AuthResponseDto>(this.createCompleteRoute(route, this.envUrl.urlAddress), body);
   }
@@ -69,27 +81,18 @@ export class AuthenticationService {
     return token && !this.jwtHelper.isTokenExpired(token);
   }
 
-  /*  public isUserAdmin = (): boolean => {
-     const token = localStorage.getItem("token");
-     const decodedToken = this.jwtHelper.decodeToken(token);
-     const role = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
- 
-     return role === 'Administrator';
-   } */
+
 
   public signInWithGoogle = () => {
     this.externalAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
-
   }
 
   public signOutExternal = () => {
     this.externalAuthService.signOut();
   }
-
   public externalLogin = (route: string, body: ExternalAuthDto) => {
     return this.http.post<AuthResponseDto>(this.createCompleteRoute(route, this.envUrl.urlAddress), body);
   }
-
   private createCompleteRoute = (route: string, envAddress: string) => {
     return `${envAddress}/${route}`;
   }

@@ -31,14 +31,57 @@ export class HomeComponent implements OnInit {
   showError: boolean = false;
   title: string = 'loginGoogle';
   auth2: any;
+  copyright: string | any = null;
   @ViewChild('loginRef', { static: true }) loginElement!: ElementRef;
 
   constructor(private authService: AuthenticationService, private router: Router, private route: ActivatedRoute) { }
   ngOnInit() {
-
+    this.copyright = new Date().getFullYear();
     this.googleAuthSDK();
+    this.loginForm = new FormGroup({
+      username: new FormControl("", [Validators.required]),
+      password: new FormControl("", [Validators.required])
+    })
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
+  }
+  validateControl = (controlName: string) => {
+    return this.loginForm.get(controlName).invalid && this.loginForm.get(controlName).touched
   }
 
+  hasError = (controlName: string, errorName: string) => {
+    return this.loginForm.get(controlName).hasError(errorName)
+  }
+
+  loginUser = (loginFormValue: any) => {
+    this.authService.isExternalAuth = false;
+    this.showError = false;
+    const login = { ...loginFormValue };
+    const userForAuth: UserForAuthenticationDto = {
+      email: login.username,
+      password: login.password,
+      clientURI: 'http://localhost:4200/authentication/forgotpassword'
+    }
+
+    this.authService.loginUser('api/accounts/login', userForAuth)
+      .subscribe({
+        next: (res: AuthResponseDto) => {
+          if (res.is2StepVerificationRequired) {
+            this.router.navigate(['/authentication/twostepverification'],
+              { queryParams: { returnUrl: this.returnUrl, provider: res.provider, email: userForAuth.email } })
+          }
+          else {
+            localStorage.setItem("token", res.token);
+            this.authService.sendAuthStateChangeNotification(res.isAuthSuccessful);
+            this.router.navigate(['welcome/live']);
+          }
+        },
+        error: (err: HttpErrorResponse) => {
+          this.errorMessage = err.message;
+          this.showError = true;
+        }
+      })
+  }
 
   externalLogin = () => {
     this.showError = false;

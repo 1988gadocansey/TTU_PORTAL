@@ -13,6 +13,8 @@ const routes: Routes = [
     component: LayoutComponent,
     loadChildren: () => import('../academics/academics.module').then((m) => m.AcademicsModule),
   },
+
+
   {
     path: 'welcome',
     component: LayoutComponent,

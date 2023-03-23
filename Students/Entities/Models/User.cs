@@ -7,6 +7,6 @@ namespace Students.Entities.Models
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
 
-        public string? LastLogin { get; set; }
+        public DateTime? LastLogin { get; set; }
     }
 }

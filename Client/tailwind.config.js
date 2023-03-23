@@ -66,6 +66,7 @@ module.exports = {
       },
       colors: {
         primary: colors.green,
+        'ttu-color':'#1a337e',
         night: {
           50: '#e4e4eb',
           100: '#bbbace',

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from './core/services/authentication.service';
 import { ThemeService } from './core/services/theme.service';
 
 @Component({
@@ -7,7 +8,11 @@ import { ThemeService } from './core/services/theme.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'Angular Tailwind';
+  title = 'TTU Portal';
 
-  constructor(public themeService: ThemeService) { }
+  constructor(public themeService: ThemeService, private authService: AuthenticationService) { }
+  ngOnInit(): void {
+    if (this.authService.isUserAuthenticated())
+      this.authService.sendAuthStateChangeNotification(true);
+  }
 }

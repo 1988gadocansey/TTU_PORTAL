@@ -1,3 +1,4 @@
+using System.Globalization;
 using AutoMapper;
 using MediatR;
 using Students.Contracts;
@@ -19,8 +20,9 @@ public class RegisterCourseCommandHandler : IRequestHandler<CreateCourseRegistra
 {
     private readonly RepositoryContext _dbContext;
     private readonly IRepositoryManager _repository;
-    private ICalenderRepository _calenderRepository;
+    private readonly ICalenderRepository _calenderRepository;
     private readonly IUserAccessor _userAccessor;
+    // private readonly ICurrentUserService _currentUserService;
     private readonly IUnitOfWork _unitOfWork;
 
     public RegisterCourseCommandHandler(IUserAccessor userAccessor, RepositoryContext dbContext, ICalenderRepository calenderRepository, IRepositoryManager repository, IUnitOfWork unitOfWork)
@@ -34,27 +36,29 @@ public class RegisterCourseCommandHandler : IRequestHandler<CreateCourseRegistra
 
     public async Task<Unit> Handle(CreateCourseRegistrationCommand request, CancellationToken cancellationToken)
     {
-        var Calender = await _calenderRepository.GetCalender();
-        var Student = _userAccessor.User;
-        var StudentDetails = await _repository.Student.GetStudentDetails(Student.ToString(), cancellationToken);
+        var calender = await _calenderRepository.GetCalender();
+        var student = _userAccessor.User ?? throw new ArgumentNullException("_userAccessor.User");
+        var studentDetails = await _repository.Student.GetStudentDetails(student.ToString(), cancellationToken);
+        if (studentDetails == null) throw new ArgumentNullException(nameof(studentDetails));
 
-        var CourseRegistration = new AcademicRecord();
+        var courseRegistration = new AcademicRecord();
+        if (courseRegistration == null) throw new ArgumentNullException(nameof(courseRegistration));
         /*  CourseRegistration.COURSE = request.CourseId;
          CourseRegistration.COURSE_CREDIT = request.CourseCredit;
          CourseRegistration.COURSE_LEVEL = request.CourseLevel;
          CourseRegistration.COURSE_SEMESTER = Convert.ToInt16(Calender.SEMESTER);
          CourseRegistration.COURSE_YEAR = Calender.YEAR; */
-        CourseRegistration.course = request.courseId;
-        CourseRegistration.dateRegistered = Convert.ToString(DateTime.UtcNow);
-        CourseRegistration.student = StudentDetails.ID;
-        CourseRegistration.sem = Calender.SEMESTER;
-        CourseRegistration.year = Calender.YEAR;
-        CourseRegistration.yrgp = StudentDetails.GRADUATING_GROUP;
-        CourseRegistration.grade = 'F';
-        CourseRegistration.gpoint = 0.0M;
-        CourseRegistration.level = StudentDetails.LEVEL;
-        CourseRegistration.lecturer = 1201610;
-        await _dbContext.AcademicRecords.AddAsync(CourseRegistration);
+        courseRegistration.course = request.courseId;
+        courseRegistration.dateRegistered = Convert.ToString(DateTime.UtcNow, CultureInfo.InvariantCulture);
+        courseRegistration.student = studentDetails.ID;
+        courseRegistration.sem = calender.SEMESTER;
+        courseRegistration.year = calender.YEAR;
+        courseRegistration.yrgp = studentDetails.GRADUATING_GROUP;
+        courseRegistration.grade = 'F';
+        courseRegistration.gpoint = 0.0M;
+        courseRegistration.level = studentDetails.LEVEL;
+        courseRegistration.lecturer = 1201610;
+        await _dbContext.AcademicRecords.AddAsync(courseRegistration);
         await _dbContext.SaveChangesAsync(cancellationToken);
         await _unitOfWork.CommitAsync();
         return Unit.Value;

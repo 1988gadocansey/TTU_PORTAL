@@ -9,8 +9,11 @@ import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './home/home.component';
 import { ErrorHandlerService } from './core/services/error-handler.service';
 import { SpinnerComponent } from './spinner/spinner.component';
-import { LoadingInterceptor } from './core/interceptor/loading.interceptor';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { AngularSvgIconModule } from 'angular-svg-icon';
+import { RouterModule } from '@angular/router';
+import { AuthenticationModule } from './authentication/authentication.module';
+import { AuthenticationComponent } from './authentication/authentication.component';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -20,7 +23,9 @@ export function tokenGetter() {
 @NgModule({
 
   declarations: [AppComponent, HomeComponent, SpinnerComponent],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, SocialLoginModule,
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, SocialLoginModule, AngularSvgIconModule.forRoot(), FormsModule,
+    ReactiveFormsModule, RouterModule,
+
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
