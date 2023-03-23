@@ -16,7 +16,7 @@ export class ResetPasswordComponent implements OnInit {
   showSuccess: boolean | any;
   showError: boolean | any;
   errorMessage: string | any;
-
+  copyright: string | any = null;
   private token: string | any;
   private email: string | any;
 
@@ -24,6 +24,7 @@ export class ResetPasswordComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.copyright = new Date().getFullYear();
     this.resetPasswordForm = new FormGroup({
       password: new FormControl('', [Validators.required]),
       confirm: new FormControl('')

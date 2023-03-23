@@ -15,13 +15,14 @@ export class ForgotPasswordComponent implements OnInit {
   errorMessage: string | any;
   showSuccess: boolean | any;
   showError: boolean = true;
-
+  copyright: string | any = null;
   constructor(private _authService: AuthenticationService) { }
 
   ngOnInit(): void {
     this.forgotPasswordForm = new FormGroup({
       email: new FormControl("", [Validators.required])
     })
+    this.copyright = new Date().getFullYear();
   }
 
   public validateControl = (controlName: string) => {

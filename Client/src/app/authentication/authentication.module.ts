@@ -10,6 +10,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { TwoStepVerificationComponent } from './two-step-verification/two-step-verification.component';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { AuthenticationComponent } from './authentication.component';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 
 
@@ -28,6 +29,7 @@ import { AuthenticationComponent } from './authentication.component';
     FormsModule,
     RouterModule,
     AuthenticationRoutingModule,
+    AngularSvgIconModule.forRoot()
 
   ]
 })
